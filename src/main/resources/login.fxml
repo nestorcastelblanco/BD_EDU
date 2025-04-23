@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.bd_edu.controllers.LoginController"
+            prefHeight="300.0" prefWidth="400.0">
+    <VBox spacing="15" alignment="CENTER" AnchorPane.topAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
+        <Label text="Inicio de Sesión" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+        <TextField fx:id="usernameField" promptText="Usuario" />
+        <PasswordField fx:id="passwordField" promptText="Contraseña" />
+        <Button text="Iniciar Sesión" onAction="#handleLogin" maxWidth="Infinity"/>
+        <Label fx:id="errorLabel" textFill="red"/>
+    </VBox>
+</AnchorPane>

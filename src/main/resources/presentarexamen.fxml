@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.bd_edu.controllers.PresentarExamenController"
+            prefHeight="600.0" prefWidth="800.0">
+
+    <VBox spacing="20"
+          AnchorPane.topAnchor="10"
+          AnchorPane.leftAnchor="10"
+          AnchorPane.rightAnchor="10"
+          AnchorPane.bottomAnchor="10">
+
+        <Label text="Presentar Examen"
+               style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+        <!-- Temporizador -->
+        <Label fx:id="tiempoLabel"
+               style="-fx-font-size: 16px;"/>
+
+        <!-- Preguntas (esto se llena dinámicamente) -->
+        <VBox fx:id="preguntasVBox"
+              spacing="15"
+              style="-fx-font-size: 16px;">
+            <!-- Aquí se añadirían las preguntas dinámicamente -->
+            <Label text="Pregunta 1: ¿Cuál es la capital de Colombia?"/>
+            <TextField promptText="Tu respuesta..."/>
+            <Label text="Pregunta 2: ¿Quién escribió 'Cien años de soledad'?"/>
+            <TextField promptText="Tu respuesta..."/>
+        </VBox>
+
+        <Button fx:id="finalizarExamenButton"
+                text="Finalizar Examen"
+                onAction="#finalizarExamen"/>
+
+        <Button fx:id="volverButton" text="Regresar" onAction="#volver"/>
+    </VBox>
+</AnchorPane>
