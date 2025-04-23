@@ -1,0 +1,150 @@
+/* Estilos Generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Fondo y Layout Global */
+.root {
+    -fx-background-color: #f4f4f4;
+    -fx-padding: 20px;
+}
+
+/* Estilo para los Labels */
+.label-titulo {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+    -fx-alignment: center;
+    -fx-padding: 10px;
+}
+
+/* Botones */
+.button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 3, 0.5, 0, 1);
+}
+
+.button:hover {
+    -fx-background-color: #45a049;
+}
+
+.boton-regresar {
+    -fx-background-color: #f44336;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-padding: 10px 20px;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+    -fx-cursor: hand;
+}
+
+.boton-regresar:hover {
+    -fx-background-color: #e53935;
+}
+
+/* Estilo para TextField y TextArea */
+.text-field {
+    -fx-background-color: #fff;
+    -fx-border-color: #ccc;
+    -fx-border-width: 1px;
+    -fx-padding: 8px;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+}
+
+.text-field:focused {
+    -fx-border-color: #4CAF50;
+}
+
+.textarea {
+    -fx-background-color: #fff;
+    -fx-border-color: #ccc;
+    -fx-border-width: 1px;
+    -fx-padding: 8px;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+}
+
+.textarea:focused {
+    -fx-border-color: #4CAF50;
+}
+
+/* Estilo para ComboBox */
+.combo-box {
+    -fx-background-color: #fff;
+    -fx-border-color: #ccc;
+    -fx-border-width: 1px;
+    -fx-padding: 8px;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+}
+
+.combo-box:focused {
+    -fx-border-color: #4CAF50;
+}
+
+/* Spinner */
+.spinner {
+    -fx-background-color: #fff;
+    -fx-border-color: #ccc;
+    -fx-border-width: 1px;
+    -fx-padding: 8px;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+}
+
+.spinner:focused {
+    -fx-border-color: #4CAF50;
+}
+
+/* Tabla */
+.table-view {
+    -fx-background-color: #fff;
+    -fx-border-color: #ccc;
+    -fx-border-width: 1px;
+}
+
+.table-view .column-header {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.table-view .cell {
+    -fx-padding: 10px;
+    -fx-font-size: 14px;
+}
+
+/* Etiquetas de las preguntas */
+.label-pregunta {
+    -fx-font-size: 16px;
+    -fx-text-fill: #333;
+    -fx-padding: 10px;
+}
+
+/* Temporizador */
+.label-temporizador {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ff9800;
+    -fx-padding: 5px;
+}
+
+/* Fondo general de la ventana */
+.anchor-pane {
+    -fx-background-color: #ffffff;
+}

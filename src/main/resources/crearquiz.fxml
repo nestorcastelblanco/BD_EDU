@@ -5,33 +5,33 @@
 
 <AnchorPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.bd_edu.controllers.CrearQuizController"
-            prefHeight="500.0" prefWidth="500.0">
+            prefHeight="500.0" prefWidth="500.0"
+            stylesheets="@estilos.css">
 
     <VBox spacing="10" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10">
-        <Label text="Crear Nuevo Quiz" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+        <Label text="Crear Nuevo Quiz" styleClass="label-titulo"/>
 
-        <TextField fx:id="nombreField" promptText="Nombre del Quiz"/>
-        <TextArea fx:id="descripcionArea" promptText="Descripción" prefHeight="80"/>
-        <ComboBox fx:id="categoriaCombo" promptText="Categoría"/>
+        <TextField fx:id="nombreField" promptText="Nombre del Quiz" styleClass="text-field"/>
+        <TextArea fx:id="descripcionArea" promptText="Descripción" prefHeight="80" styleClass="text-field"/>
+        <ComboBox fx:id="categoriaCombo" promptText="Categoría" styleClass="combo-box"/>
 
         <HBox spacing="10">
             <Label text="Preguntas totales:"/>
-            <Spinner fx:id="totalPreguntasSpinner" prefWidth="80"/>
+            <Spinner fx:id="totalPreguntasSpinner" prefWidth="80" styleClass="spinner"/>
         </HBox>
 
         <HBox spacing="10">
             <Label text="Preguntas a presentar:"/>
-            <Spinner fx:id="preguntasExamenSpinner" prefWidth="80"/>
+            <Spinner fx:id="preguntasExamenSpinner" prefWidth="80" styleClass="spinner"/>
         </HBox>
 
         <HBox spacing="10">
             <Label text="Tiempo (min):"/>
-            <Spinner fx:id="tiempoSpinner" prefWidth="80"/>
+            <Spinner fx:id="tiempoSpinner" prefWidth="80" styleClass="spinner"/>
         </HBox>
 
-        <Button text="Crear Quiz" onAction="#crearQuiz"/>
+        <Button text="Crear Quiz" onAction="#crearQuiz" styleClass="button"/>
 
-        <Button fx:id="volverButton" text="Regresar" onAction="#volver"/>
-
+        <Button fx:id="volverButton" text="Regresar" onAction="#volver" styleClass="boton-regresar"/>
     </VBox>
 </AnchorPane>

@@ -7,7 +7,8 @@
 
 <AnchorPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.bd_edu.controllers.MenuDocenteController"
-            prefHeight="400.0" prefWidth="600.0">
+            prefHeight="400.0" prefWidth="600.0"
+            stylesheets="@estilos.css">
 
     <!-- Contenedor principal con margen interno indicado vía anclajes -->
     <VBox spacing="20"
@@ -17,24 +18,28 @@
           AnchorPane.bottomAnchor="10">
 
         <Label text="Menú Docente"
-               style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+               styleClass="label-titulo"/>
 
         <Button fx:id="crearExamenButton"
                 text="Crear Examen"
-                onAction="#crearExamen"/>
+                onAction="#crearExamen"
+                styleClass="button"/>
 
         <Button fx:id="agregarPreguntaButton"
                 text="Agregar Pregunta"
-                onAction="#agregarPregunta"/>
+                onAction="#agregarPregunta"
+                styleClass="button"/>
 
         <Button fx:id="verEstadisticasButton"
                 text="Ver Estadísticas"
-                onAction="#verEstadisticas"/>
+                onAction="#verEstadisticas"
+                styleClass="button"/>
 
         <Button fx:id="configurarExamenButton"
                 text="Configurar Examen"
-                onAction="#configurarExamen"/>
+                onAction="#configurarExamen"
+                styleClass="button"/>
 
-        <Button fx:id="volverButton" text="Salir" onAction="#volver"/>
+        <Button fx:id="volverButton" text="Salir" onAction="#volver" styleClass="boton-regresar"/>
     </VBox>
 </AnchorPane>

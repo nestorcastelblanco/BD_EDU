@@ -15,6 +15,7 @@ public class QuizApplication extends Application {
         QuizApplication.primaryStage = primaryStage;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml"));
         Scene scene = new Scene(loader.load());
+        scene.getStylesheets().add(getClass().getResource("/estilos.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.setTitle("Sistema de Exámenes");
         primaryStage.show();

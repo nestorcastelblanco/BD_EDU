@@ -5,7 +5,8 @@
 
 <AnchorPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.bd_edu.controllers.PresentarExamenController"
-            prefHeight="600.0" prefWidth="800.0">
+            prefHeight="600.0" prefWidth="800.0"
+            stylesheets="@estilos.css">
 
     <VBox spacing="20"
           AnchorPane.topAnchor="10"
@@ -14,27 +15,31 @@
           AnchorPane.bottomAnchor="10">
 
         <Label text="Presentar Examen"
-               style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+               styleClass="label-titulo"/>
 
         <!-- Temporizador -->
         <Label fx:id="tiempoLabel"
-               style="-fx-font-size: 16px;"/>
+               styleClass="label-temporizador"/>
 
         <!-- Preguntas (esto se llena dinámicamente) -->
         <VBox fx:id="preguntasVBox"
               spacing="15"
-              style="-fx-font-size: 16px;">
+              styleClass="preguntas-contenedor">
             <!-- Aquí se añadirían las preguntas dinámicamente -->
-            <Label text="Pregunta 1: ¿Cuál es la capital de Colombia?"/>
-            <TextField promptText="Tu respuesta..."/>
-            <Label text="Pregunta 2: ¿Quién escribió 'Cien años de soledad'?"/>
-            <TextField promptText="Tu respuesta..."/>
+            <Label text="Pregunta 1: ¿Cuál es la capital de Colombia?" styleClass="label-pregunta"/>
+            <TextField promptText="Tu respuesta..." styleClass="campo-respuesta"/>
+            <Label text="Pregunta 2: ¿Quién escribió 'Cien años de soledad'?" styleClass="label-pregunta"/>
+            <TextField promptText="Tu respuesta..." styleClass="campo-respuesta"/>
         </VBox>
 
         <Button fx:id="finalizarExamenButton"
                 text="Finalizar Examen"
-                onAction="#finalizarExamen"/>
+                onAction="#finalizarExamen"
+                styleClass="button-accion"/>
 
-        <Button fx:id="volverButton" text="Regresar" onAction="#volver"/>
+        <Button fx:id="volverButton"
+                text="Regresar"
+                onAction="#volver"
+                styleClass="boton-regresar"/>
     </VBox>
 </AnchorPane>
