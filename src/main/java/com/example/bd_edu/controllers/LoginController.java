@@ -1,5 +1,6 @@
 package com.example.bd_edu.controllers;
 
+import com.example.bd_edu.Bd_Edu;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -23,6 +24,8 @@ public class LoginController {
     @FXML
     private Label errorLabel;
 
+    Bd_Edu bd_edu = Bd_Edu.getInstance();
+
     @FXML
     private void handleLogin() {
         String username = usernameField.getText().trim();
@@ -33,15 +36,18 @@ public class LoginController {
             return;
         }
 
-        if (username.equals("docente") && password.equals("12345")) {
-            mostrarAlerta("Acceso concedido", "Bienvenido, " + username);
-            cargarMenuDocente();
-        }
-        if (username.equals("estudiante") && password.equals("12345")) {
-            mostrarAlerta("Acceso concedido", "Bienvenido, " + username);
-            cargarMenuEstudiante();
-        }
-        else {
+        if (bd_edu.iniciarSesion(username, password)) {
+            String rol = bd_edu.getRolUsuario();
+            if ("docente".equals(rol)) {
+                mostrarAlerta("Acceso concedido", "Bienvenido, Docente " + username);
+                cargarMenuDocente(); // Cargar la vista de docente
+            } else if ("estudiante".equals(rol)) {
+                mostrarAlerta("Acceso concedido", "Bienvenido, Estudiante " + username);
+                cargarMenuEstudiante(); // Cargar la vista de estudiante
+            } else if ("admin".equals(rol)) {
+                mostrarAlerta("Acceso concedido", "Bienvenido, Administrador " + username);
+            }
+        } else {
             errorLabel.setText("Credenciales incorrectas. Inténtelo nuevamente.");
         }
     }
