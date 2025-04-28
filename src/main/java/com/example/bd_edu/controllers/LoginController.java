@@ -9,6 +9,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -63,7 +64,7 @@ public class LoginController {
     private void cargarMenuDocente() {
         try {
             // Cargar la siguiente vista (ejemplo: MenuDocente)
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/menudocente.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ventanas/menudocente.fxml"));
             Stage stage = (Stage) usernameField.getScene().getWindow();
             Scene scene = new Scene(loader.load());
             stage.setScene(scene);
@@ -77,7 +78,7 @@ public class LoginController {
 
     private void cargarMenuEstudiante() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/menuestudiante.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ventanas/menuestudiante.fxml"));
             Stage stage = (Stage) usernameField.getScene().getWindow();
             Scene scene = new Scene(loader.load());
             stage.setScene(scene);
@@ -88,4 +89,10 @@ public class LoginController {
             mostrarAlerta("Error", "No se pudo cargar la siguiente ventana.");
         }
     }
+
+    public void onFocus(MouseEvent event) {
+        TextField textField = (TextField) event.getSource();
+        textField.setStyle("-fx-border-color: #2575fc; -fx-border-width: 2px;");
+    }
+
 }

@@ -7,144 +7,86 @@
 }
 
 /* Fondo y Layout Global */
-.root {
-    -fx-background-color: #f4f4f4;
-    -fx-padding: 20px;
+.anchor-pane {
+    -fx-background-color: #1e1e1e;  /* Fondo oscuro como en el login */
 }
 
 /* Estilo para los Labels */
 .label-titulo {
-    -fx-font-size: 24px;
+    -fx-font-size: 32px;
     -fx-font-weight: bold;
-    -fx-text-fill: #333;
+    -fx-text-fill: white;
     -fx-alignment: center;
-    -fx-padding: 10px;
+    -fx-padding: 20px;
+    -fx-text-alignment: center;
+    -fx-font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+/* Estilo para el "Login Box" */
+.login-box {
+    -fx-background-color: linear-gradient(to bottom right, #0f2027, #203a43, #2c5364);  /* Fondo degradado */
+    -fx-background-radius: 15;
+    -fx-padding: 30;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 10, 0, 0, 5);  /* Sombra para efecto moderno */
 }
 
 /* Botones */
 .button {
-    -fx-background-color: #4CAF50;
+    -fx-background-color: #2575fc;
     -fx-text-fill: white;
     -fx-font-size: 16px;
     -fx-font-weight: bold;
-    -fx-padding: 10px 20px;
-    -fx-background-radius: 5px;
-    -fx-border-radius: 5px;
+    -fx-padding: 12px 25px;
+    -fx-background-radius: 10;
     -fx-cursor: hand;
-    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 3, 0.5, 0, 1);
+    -fx-transition: 0.3s ease;
 }
 
 .button:hover {
-    -fx-background-color: #45a049;
+    -fx-background-color: #4a90e2;
+    -fx-text-fill: white;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
 }
 
+/* Estilo para el botón de regresar (Salir) */
 .boton-regresar {
     -fx-background-color: #f44336;
     -fx-text-fill: white;
     -fx-font-size: 16px;
-    -fx-padding: 10px 20px;
-    -fx-background-radius: 5px;
-    -fx-border-radius: 5px;
+    -fx-font-weight: bold;
+    -fx-padding: 12px 25px;
+    -fx-background-radius: 10;
     -fx-cursor: hand;
 }
 
 .boton-regresar:hover {
     -fx-background-color: #e53935;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
 }
 
-/* Estilo para TextField y TextArea */
+/* Estilo para TextField y PasswordField */
 .text-field {
-    -fx-background-color: #fff;
+    -fx-background-color: white;
     -fx-border-color: #ccc;
     -fx-border-width: 1px;
     -fx-padding: 8px;
+    -fx-font-size: 16px;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+}
+
+/* Estilo para los Labels de error */
+.error-label {
     -fx-font-size: 14px;
-    -fx-background-radius: 5px;
-    -fx-border-radius: 5px;
+    -fx-text-fill: red;
 }
 
-.text-field:focused {
-    -fx-border-color: #4CAF50;
-}
-
-.textarea {
-    -fx-background-color: #fff;
-    -fx-border-color: #ccc;
-    -fx-border-width: 1px;
-    -fx-padding: 8px;
-    -fx-font-size: 14px;
-    -fx-background-radius: 5px;
-    -fx-border-radius: 5px;
-}
-
-.textarea:focused {
-    -fx-border-color: #4CAF50;
-}
-
-/* Estilo para ComboBox */
-.combo-box {
-    -fx-background-color: #fff;
-    -fx-border-color: #ccc;
-    -fx-border-width: 1px;
-    -fx-padding: 8px;
-    -fx-font-size: 14px;
-    -fx-background-radius: 5px;
-    -fx-border-radius: 5px;
-}
-
-.combo-box:focused {
-    -fx-border-color: #4CAF50;
-}
-
-/* Spinner */
-.spinner {
-    -fx-background-color: #fff;
-    -fx-border-color: #ccc;
-    -fx-border-width: 1px;
-    -fx-padding: 8px;
-    -fx-font-size: 14px;
-    -fx-background-radius: 5px;
-    -fx-border-radius: 5px;
-}
-
-.spinner:focused {
-    -fx-border-color: #4CAF50;
-}
-
-/* Tabla */
-.table-view {
-    -fx-background-color: #fff;
-    -fx-border-color: #ccc;
-    -fx-border-width: 1px;
-}
-
-.table-view .column-header {
-    -fx-background-color: #4CAF50;
+/* Animación para el Hover en el botón */
+.button:hover {
+    -fx-background-color: #4a90e2;
     -fx-text-fill: white;
-    -fx-font-weight: bold;
-}
-
-.table-view .cell {
-    -fx-padding: 10px;
-    -fx-font-size: 14px;
-}
-
-/* Etiquetas de las preguntas */
-.label-pregunta {
-    -fx-font-size: 16px;
-    -fx-text-fill: #333;
-    -fx-padding: 10px;
-}
-
-/* Temporizador */
-.label-temporizador {
-    -fx-font-size: 16px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #ff9800;
-    -fx-padding: 5px;
-}
-
-/* Fondo general de la ventana */
-.anchor-pane {
-    -fx-background-color: #ffffff;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
 }

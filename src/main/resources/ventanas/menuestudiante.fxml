@@ -6,7 +6,7 @@
 <AnchorPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.bd_edu.controllers.MenuEstudianteController"
             prefHeight="400.0" prefWidth="600.0"
-            stylesheets="@estilos.css">
+            stylesheets="@../estilos.css">
 
     <VBox spacing="20"
           AnchorPane.topAnchor="10"

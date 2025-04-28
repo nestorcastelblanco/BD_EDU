@@ -87,7 +87,7 @@ public class VerBancoPreguntasController {
     @FXML
     private void volver() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/menudocente.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ventanas/menudocente.fxml"));
             Stage stage = (Stage) volverButton.getScene().getWindow(); // Usa un componente visible en esta escena
             Scene scene = new Scene(loader.load());
             stage.setScene(scene);

@@ -6,7 +6,7 @@
 <AnchorPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.bd_edu.controllers.AgregarPreguntaController"
             prefHeight="400.0" prefWidth="500.0"
-            stylesheets="@estilos.css">
+            stylesheets="@../estilos.css">
 
     <VBox spacing="15" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10">
         <Label text="Agregar Nueva Pregunta" styleClass="label-titulo"/>

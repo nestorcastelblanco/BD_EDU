@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.bd_edu.controllers.MenuDocenteController"
+            prefHeight="600.0" prefWidth="800.0"
+            stylesheets="@../estilos.css"
+            styleClass="anchor-pane">
+
+    <!-- Contenedor principal con anclajes -->
+    <VBox alignment="CENTER" spacing="20"
+          AnchorPane.topAnchor="100.0"
+          AnchorPane.leftAnchor="150.0"
+          AnchorPane.rightAnchor="150.0"
+          AnchorPane.bottomAnchor="100.0">
+
+        <!-- Contenedor con fondo degradado y sombra -->
+        <VBox spacing="20" alignment="CENTER" styleClass="login-box">
+            <!-- Título centrado -->
+            <Label text="Menú Docente" styleClass="label-titulo"/>
+
+            <!-- Botones con estilo similar -->
+            <Button fx:id="crearExamenButton" text="Crear Examen" onAction="#crearExamen" styleClass="button"/>
+            <Button fx:id="agregarPreguntaButton" text="Agregar Pregunta" onAction="#agregarPregunta" styleClass="button"/>
+            <Button fx:id="verEstadisticasButton" text="Ver Estadísticas" onAction="#verEstadisticas" styleClass="button"/>
+            <Button fx:id="configurarExamenButton" text="Configurar Examen" onAction="#configurarExamen" styleClass="button"/>
+
+            <!-- Botón para regresar (salir) -->
+            <Button fx:id="volverButton" text="Salir" onAction="#volver" styleClass="boton-regresar"/>
+        </VBox>
+    </VBox>
+</AnchorPane>

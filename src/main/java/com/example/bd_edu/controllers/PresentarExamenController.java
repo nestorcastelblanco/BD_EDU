@@ -50,7 +50,7 @@ public class PresentarExamenController {
     @FXML
     private void volver() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/menuestudiante.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ventanas/menuestudiante.fxml"));
             Stage stage = (Stage) volverButton.getScene().getWindow(); // Usa un componente visible en esta escena
             Scene scene = new Scene(loader.load());
             stage.setScene(scene);

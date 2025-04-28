@@ -1,5 +1,22 @@
 package com.example.bd_edu;
 
+import javafx.event.Event;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+
+import java.io.EOFException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import java.sql.*;
 
 public class Bd_Edu {
@@ -11,7 +28,17 @@ public class Bd_Edu {
     // Cambia estos datos según tu entorno
     private final String url = "jdbc:oracle:thin:@//localhost:1521/xe";
     private final String user = "SYSTEM";
-    private final String password = "0000";
+    private final String password = "Arango2004";
+
+    private static Bd_Edu bd_edu;
+
+    public static Bd_Edu getInstance(){
+        if(bd_edu == null){
+            bd_edu = new Bd_Edu();
+        }
+
+        return  bd_edu;
+    }
 
     private Bd_Edu() {
         try {
@@ -26,13 +53,6 @@ public class Bd_Edu {
 
     public Connection getConnection() {
         return connection;
-    }
-
-    public static Bd_Edu getInstance() {
-        if (instance == null) {
-            instance = new Bd_Edu();
-        }
-        return instance;
     }
 
     public boolean iniciarSesion(String usuario, String clave) {
@@ -71,6 +91,23 @@ public class Bd_Edu {
 
     public String getRolUsuario() {
         return rolUsuario;
+    }
+
+    public static void loadStage(String url, Event event) {
+
+        try {
+            ((Node) (event.getSource())).getScene().getWindow().hide();
+
+            Parent root = FXMLLoader.load(Objects.requireNonNull(QuizApplication.class.getResource(url)));
+            Scene scene = new Scene(root);
+            Stage newStage = new Stage();
+            newStage.setScene(scene);
+            newStage.setTitle("Plataforma");
+            newStage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

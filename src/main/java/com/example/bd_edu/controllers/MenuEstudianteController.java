@@ -25,17 +25,17 @@ public class MenuEstudianteController {
 
     @FXML
     private void verExamenes() {
-        cargarVentana("/presentarexamen.fxml", "Exámenes Disponibles");
+        cargarVentana("/ventanas/presentarexamen.fxml", "Exámenes Disponibles");
     }
 
     @FXML
     private void verEstadisticas() {
-        cargarVentana("/estadisticas.fxml", "Estadísticas del Estudiante");
+        cargarVentana("/ventanas/estadisticas.fxml", "Estadísticas del Estudiante");
     }
 
     @FXML
     private void verHorario() {
-        cargarVentana("/horario.fxml", "Horario de Clases");
+        cargarVentana("/ventanas/horario.fxml", "Horario de Clases");
     }
 
     private void cargarVentana(String rutaFXML, String tituloVentana) {
@@ -55,7 +55,7 @@ public class MenuEstudianteController {
     @FXML
     private void volver() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ventanas/login.fxml"));
             Stage stage = (Stage) volverButton.getScene().getWindow(); // Usa un componente visible en esta escena
             Scene scene = new Scene(loader.load());
             stage.setScene(scene);

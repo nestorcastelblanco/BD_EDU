@@ -1,5 +1,7 @@
 package com.example.bd_edu.controllers;
 
+import com.example.bd_edu.Bd_Edu;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -29,25 +31,25 @@ public class MenuDocenteController {
     @FXML
     private void crearExamen() {
         System.out.println("Acción para crear un examen.");
-        cargarVentana("/crearquiz.fxml", "Crear Examen");
+        cargarVentana("/ventanas/crearquiz.fxml", "Crear Examen");
     }
 
     @FXML
     private void agregarPregunta() {
         System.out.println("Acción para agregar una pregunta.");
-        cargarVentana("/agregarpregunta.fxml", "Agregar Pregunta");
+        cargarVentana("/ventanas/agregarpregunta.fxml", "Agregar Pregunta");
     }
 
     @FXML
     private void verEstadisticas() {
         System.out.println("Acción para ver las estadísticas.");
-        cargarVentana("/estadisticas.fxml", "Estadisticas");
+        cargarVentana("/ventanas/estadisticas.fxml", "Estadisticas");
     }
 
     @FXML
     private void configurarExamen() {
         System.out.println("Acción para configurar un examen.");
-        cargarVentana("/programarexamen.fxml", "Programar Examen");
+        cargarVentana("/ventanas/programarexamen.fxml", "Programar Examen");
     }
 
     private void cargarVentana(String rutaFXML, String tituloVentana) {
@@ -73,21 +75,10 @@ public class MenuDocenteController {
     }
 
     @FXML
-    private void volver() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml"));
-            Stage stage = (Stage) volverButton.getScene().getWindow(); // Usa un componente visible en esta escena
-            Scene scene = new Scene(loader.load());
-            stage.setScene(scene);
-            stage.setTitle("Login");
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText(null);
-            alert.setContentText("No se pudo regresar al menú.");
-            alert.showAndWait();
+    public void volver(ActionEvent event) {
+        Object evt = event.getSource();
+        if (evt.equals(volverButton)) {
+            Bd_Edu.loadStage("/ventanas/login.fxml", event);
         }
     }
 }

@@ -5,15 +5,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
 public class QuizApplication extends Application {
     private static Stage primaryStage;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         QuizApplication.primaryStage = primaryStage;
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ventanas/login.fxml"));
         Scene scene = new Scene(loader.load());
         scene.getStylesheets().add(getClass().getResource("/estilos.css").toExternalForm());
         primaryStage.setScene(scene);
