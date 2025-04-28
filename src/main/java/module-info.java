@@ -6,6 +6,7 @@ module com.example.bd_edu {
     requires com.dlsc.formsfx;
     requires org.kordamp.bootstrapfx.core;
     requires java.sql;
+    requires static lombok;
 
     opens com.example.bd_edu to javafx.fxml;
     exports com.example.bd_edu;

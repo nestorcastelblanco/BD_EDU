@@ -103,6 +103,7 @@ public class Bd_Edu {
             Stage newStage = new Stage();
             newStage.setScene(scene);
             newStage.setTitle("Plataforma");
+            newStage.centerOnScreen();
             newStage.show();
 
         } catch (Exception e) {

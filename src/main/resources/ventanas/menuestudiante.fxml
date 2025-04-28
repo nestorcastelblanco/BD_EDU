@@ -5,33 +5,49 @@
 
 <AnchorPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.bd_edu.controllers.MenuEstudianteController"
-            prefHeight="400.0" prefWidth="600.0"
-            stylesheets="@../estilos.css">
+            prefHeight="600.0" prefWidth="800.0"
+            stylesheets="@../estilos.css"
+            styleClass="anchor-pane">
 
     <VBox spacing="20"
-          AnchorPane.topAnchor="10"
-          AnchorPane.leftAnchor="10"
-          AnchorPane.rightAnchor="10"
-          AnchorPane.bottomAnchor="10">
+          alignment="CENTER"
+          AnchorPane.topAnchor="100"
+          AnchorPane.leftAnchor="100"
+          AnchorPane.rightAnchor="100"
+          AnchorPane.bottomAnchor="100">
 
-        <Label text="Menú Estudiante"
-               styleClass="label-titulo"/>
+        <VBox spacing="20" alignment="CENTER" styleClass="login-box">
 
-        <Button fx:id="verExamenesButton"
-                text="Ver Exámenes Disponibles"
-                onAction="#verExamenes"
-                styleClass="button"/>
+            <Label text="Menú Estudiante" styleClass="label-titulo"/>
 
-        <Button fx:id="verEstadisticasButton"
-                text="Ver Estadísticas"
-                onAction="#verEstadisticas"
-                styleClass="button"/>
+            <!-- Primera fila de botones -->
+            <HBox spacing="20" alignment="CENTER">
+                <Button fx:id="verExamenesButton"
+                        text="Ver Exámenes Disponibles"
+                        onAction="#verExamenes"
+                        styleClass="button"
+                        maxWidth="250" minWidth="250"/>
+                <Button fx:id="verEstadisticasButton"
+                        text="Ver Estadísticas"
+                        onAction="#verEstadisticas"
+                        styleClass="button"
+                        maxWidth="250" minWidth="250"/>
+            </HBox>
 
-        <Button fx:id="verHorarioButton"
-                text="Ver Horario"
-                onAction="#verHorario"
-                styleClass="button"/>
+            <!-- Segunda fila de botones -->
+            <HBox spacing="20" alignment="CENTER">
+                <Button fx:id="verHorarioButton"
+                        text="Ver Horario"
+                        onAction="#verHorario"
+                        styleClass="button"
+                        maxWidth="250" minWidth="250"/>
+                <Button fx:id="volverButton"
+                        text="Salir"
+                        onAction="#volver"
+                        styleClass="boton-regresar"
+                        maxWidth="250" minWidth="250"/>
+            </HBox>
 
-        <Button fx:id="volverButton" text="Salir" onAction="#volver" styleClass="boton-regresar"/>
+        </VBox>
     </VBox>
 </AnchorPane>

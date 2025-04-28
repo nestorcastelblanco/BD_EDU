@@ -2,31 +2,30 @@ package com.example.bd_edu;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.Objects;
+
 public class QuizApplication extends Application {
-    private static Stage primaryStage;
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        QuizApplication.primaryStage = primaryStage;
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ventanas/login.fxml"));
-        Scene scene = new Scene(loader.load());
-        scene.getStylesheets().add(getClass().getResource("/estilos.css").toExternalForm());
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("Sistema de Exámenes");
-        primaryStage.show();
-    }
+    public void start(Stage stage) throws Exception {
+        FXMLLoader loader = new FXMLLoader(QuizApplication.class.getResource("/ventanas/login.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
 
-    public static void setRoot(String fxml) throws Exception {
-        FXMLLoader loader = new FXMLLoader(QuizApplication.class.getResource("/fxml/" + fxml + ".fxml"));
-        Scene scene = new Scene(loader.load());
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        scene.getStylesheets().add(Objects.requireNonNull(QuizApplication.class.getResource("/estilos.css")).toExternalForm());
+
+        stage.setScene(scene);
+        stage.setTitle("Sistema de Exámenes");
+        stage.setResizable(false);       // <- para que no puedan cambiar el tamaño
+        stage.centerOnScreen();           // <- para que siempre salga centrado
+        stage.show();
     }
 
     public static void main(String[] args) {
-        launch(args);
+        launch(QuizApplication.class, args);
     }
 }
