@@ -7,6 +7,7 @@ module com.example.bd_edu {
     requires org.kordamp.bootstrapfx.core;
     requires java.sql;
     requires static lombok;
+    requires ojdbc8;
 
     opens com.example.bd_edu to javafx.fxml;
     exports com.example.bd_edu;
