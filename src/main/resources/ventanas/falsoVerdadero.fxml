@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.bd_edu.controllers.PreguntaFalsoVerdaderoController"
+      spacing="10" alignment="CENTER">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Crear Pregunta Verdadero / Falso" style="-fx-font-size: 16px;"/>
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Enunciado:"/>
+        <TextField fx:id="enunciadoField" promptText="Ingrese el enunciado" styleClass="text-field" HBox.hgrow="ALWAYS"/>
+    </HBox>
+
+    <!-- Definimos el ToggleGroup -->
+    <fx:define>
+        <ToggleGroup fx:id="verdaderoFalsoGroup"/>
+    </fx:define>
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <RadioButton fx:id="verdaderoRadio" text="Verdadero" toggleGroup="$verdaderoFalsoGroup"/>
+        <RadioButton fx:id="falsoRadio" text="Falso" toggleGroup="$verdaderoFalsoGroup"/>
+    </HBox>
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <children>
+            <Label text="Estado:"/>
+            <ComboBox fx:id="comboEstado" promptText="Seleccione estado" prefWidth="150"/>
+            <Label text="Tema:"/>
+            <ComboBox fx:id="comboTema" promptText="Seleccione tema" prefWidth="150"/>
+        </children>
+    </HBox>
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <children>
+            <Label text="Porcentaje:"/>
+            <TextField fx:id="porcentajeField" promptText="Ingrese porcentaje" prefWidth="100"/>
+            <Label text="Tiempo (segundos):"/>
+            <TextField fx:id="tiempoField" promptText="Tiempo" prefWidth="100"/>
+        </children>
+    </HBox>
+
+    <HBox spacing="20" alignment="CENTER">
+        <children>
+            <Button fx:id="guardarButton" text="Guardar Pregunta" onAction="#guardarPregunta"/>
+            <Button fx:id="volverButton" text="Volver" onAction="#volver"/>
+        </children>
+    </HBox>
+
+</VBox>

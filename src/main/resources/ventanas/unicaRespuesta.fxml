@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.bd_edu.controllers.PreguntaUnicaRespuesta"
+            prefWidth="600.0" prefHeight="400.0"
+            stylesheets="@app.css">
+
+    <VBox spacing="15"
+          AnchorPane.topAnchor="10"
+          AnchorPane.leftAnchor="10"
+          AnchorPane.rightAnchor="10"
+          AnchorPane.bottomAnchor="10"
+          alignment="CENTER">
+
+        <!-- Título -->
+        <Label text="Crear Pregunta de Única Respuesta"
+               styleClass="label-titulo"/>
+
+        <!-- Campo de texto para la pregunta -->
+        <TextField fx:id="enunciadoField" promptText="Ingrese el enunciado de la pregunta"
+                   styleClass="text-field"/>
+
+        <!-- Título -->
+        <Label text="Porcentaje de Pregunta"
+               styleClass="label-titulo"/>
+
+        <!-- Campo de texto para la pregunta -->
+        <TextField fx:id="porcentajeField" promptText="Ingrese el porcentaje de la pregunta"
+                   styleClass="text-field"/>
+
+        <!-- Título -->
+        <Label text="Tiempo de Pregunta"
+               styleClass="label-titulo"/>
+
+        <!-- Campo de texto para la pregunta -->
+        <TextField fx:id="tiempoField" promptText="Ingrese el tiempo de la pregunta"
+                   styleClass="text-field"/>
+
+
+        <Label text="Tema:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <ComboBox fx:id="comboTema" promptText="Seleccione un tema" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+        <Label text="Estado:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+        <ComboBox fx:id="comboEstado" GridPane.columnIndex="1" GridPane.rowIndex="6">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Público" />
+                    <String fx:value="Privado" />
+                </FXCollections>
+            </items>
+        </ComboBox>
+
+        <fx:define>
+            <ToggleGroup fx:id="opcionesGroup"/>
+        </fx:define>
+
+        <!-- Opciones con TextFields + RadioButtons -->
+        <VBox spacing="10">
+            <Label text="Opciones:"/>
+
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <RadioButton fx:id="radio1" toggleGroup="$opcionesGroup"/>
+                <TextField fx:id="opcionField1" promptText="Opción 1"/>
+            </HBox>
+
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <RadioButton fx:id="radio2" toggleGroup="$opcionesGroup"/>
+                <TextField fx:id="opcionField2" promptText="Opción 2"/>
+            </HBox>
+
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <RadioButton fx:id="radio3" toggleGroup="$opcionesGroup"/>
+                <TextField fx:id="opcionField3" promptText="Opción 3"/>
+            </HBox>
+
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <RadioButton fx:id="radio4" toggleGroup="$opcionesGroup"/>
+                <TextField fx:id="opcionField4" promptText="Opción 4"/>
+            </HBox>
+        </VBox>
+
+        <!-- Botones -->
+        <Button fx:id="guardarButton"
+                text="Guardar Pregunta"
+                onAction="#guardarPregunta"
+                maxWidth="Infinity"
+                styleClass="button"/>
+
+        <Button fx:id="volverButton"
+                text="Regresar"
+                onAction="#volver"
+                styleClass="boton-regresar"/>
+
+    </VBox>
+</AnchorPane>

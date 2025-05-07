@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.bd_edu.controllers.PreguntaEmparejarController"
+      spacing="10" alignment="CENTER">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Crear Pregunta de Emparejar" style="-fx-font-size: 16px;"/>
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Enunciado:"/>
+        <TextField fx:id="enunciadoField" promptText="Ingrese el enunciado"
+                   styleClass="text-field" HBox.hgrow="ALWAYS"/>
+    </HBox>
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Opción 1:"/>
+        <TextField fx:id="opcion1Field" promptText="Ingrese la primera opción"
+                   styleClass="text-field" HBox.hgrow="ALWAYS"/>
+    </HBox>
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Opción 2:"/>
+        <TextField fx:id="opcion2Field" promptText="Ingrese la segunda opción"
+                   styleClass="text-field" HBox.hgrow="ALWAYS"/>
+    </HBox>
+
+    <Button fx:id="guardarButton" text="Guardar Pregunta" onAction="#guardarPregunta" styleClass="button"/>
+    <Button fx:id="volverButton" text="Regresar" onAction="#volver" styleClass="boton-regresar"/>
+
+</VBox>

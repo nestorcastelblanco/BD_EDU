@@ -14,10 +14,10 @@ public class AgregarPreguntaController {
     private TextArea preguntaTextArea;
 
     @FXML
-    private ComboBox<String> tipoPreguntaCombo;
+    private ComboBox<String> tipoPreguntaCombo, areaPregunta, permisoPreguntaCombo;
 
     @FXML
-    private TextField porcentajeField;
+    private TextField porcentajeField, respuesta;
 
     @FXML
     private Button guardarButton;
@@ -28,12 +28,25 @@ public class AgregarPreguntaController {
     @FXML
     private void initialize() {
         tipoPreguntaCombo.getItems().addAll(
-                "Selección única",
+                "Única respuesta",
                 "Selección múltiple",
                 "Verdadero / Falso",
                 "Emparejar",
-                "Ordenar",
+                "Ordenar"   ,
                 "Completar"
+        );
+
+        areaPregunta.getItems().addAll(
+                "Ciencias Sociales",
+                "Matematicas",
+                "Ecuaciones",
+                "Español",
+                "Ingles"
+        );
+
+        permisoPreguntaCombo.getItems().addAll(
+                "publica",
+                "privada"
         );
     }
 

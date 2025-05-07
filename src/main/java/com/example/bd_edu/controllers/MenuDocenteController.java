@@ -37,7 +37,7 @@ public class MenuDocenteController {
     @FXML
     private void agregarPregunta() {
         System.out.println("Acción para agregar una pregunta.");
-        cargarVentana("/ventanas/agregarpregunta.fxml", "Agregar Pregunta");
+        cargarVentana("/ventanas/seleccionarTipoPregunta.fxml", "Agregar Pregunta");
     }
 
     @FXML

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER_LEFT" spacing="15" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bd_edu.controllers.PreguntaCompletarController">
+
+    <padding>
+        <Insets bottom="20" left="20" right="20" top="20" />
+    </padding>
+
+    <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Crear Pregunta de Completar" />
+
+    <GridPane hgap="10" vgap="10">
+        <columnConstraints>
+            <ColumnConstraints halignment="RIGHT" />
+            <ColumnConstraints hgrow="ALWAYS" />
+        </columnConstraints>
+
+        <Label text="Pregunta:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <TextArea fx:id="txtPregunta" prefRowCount="3" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+        <Label text="Tema:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <ComboBox fx:id="comboTema" promptText="Seleccione un tema" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+        <Label text="Porcentaje:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+        <TextField fx:id="txtPorcentaje" promptText="Ej: 20" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+        <Label text="Tiempo límite (min):" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+        <TextField fx:id="txtTiempo" promptText="Ej: 30" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+        <Label text="Respuesta correcta:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+        <TextField fx:id="txtRespuesta" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+
+        <Label text="Estado:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+        <ComboBox fx:id="comboEstado" GridPane.columnIndex="1" GridPane.rowIndex="6">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Público" />
+                    <String fx:value="Privado" />
+                </FXCollections>
+            </items>
+        </ComboBox>
+
+        <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+        </rowConstraints>
+    </GridPane>
+
+    <HBox alignment="CENTER_RIGHT" spacing="10">
+        <padding>
+            <Insets bottom="0" left="0" right="0" top="10" />
+        </padding>
+        <Button fx:id="volver" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#volver" text="Volver" />
+        <Button fx:id="btnGuardar" onAction="#guardar" text="Guardar" />
+    </HBox>
+</VBox>

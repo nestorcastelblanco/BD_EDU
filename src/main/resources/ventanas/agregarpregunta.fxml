@@ -13,9 +13,17 @@
 
         <TextArea fx:id="preguntaTextArea" promptText="Escriba el texto de la pregunta" prefHeight="100"/>
 
-        <ComboBox fx:id="tipoPreguntaCombo" promptText="Seleccione el tipo de pregunta"/>
+        <HBox spacing="15" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" >
+            <ComboBox fx:id="tipoPreguntaCombo" promptText="Seleccione el tipo de pregunta"/>
+            <ComboBox fx:id="areaPregunta" promptText="Seleccione el tema de la pregunta"/>
+        </HBox>
 
-        <TextField fx:id="porcentajeField" promptText="Porcentaje de la nota (Ej: 25)"/>
+        <HBox spacing="15" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10">
+            <TextField fx:id="porcentajeField" promptText="Porcentaje de la nota (Ej: 25)"/>
+            <TextField fx:id="respuesta" promptText="Respuesta a la pregunta"/>
+        </HBox>
+
+        <ComboBox fx:id="permisoPreguntaCombo" promptText="Seleccione el estado"/>
 
         <Button fx:id="guardarButton" text="Guardar Pregunta" onAction="#guardarPregunta" styleClass="button"/>
 
