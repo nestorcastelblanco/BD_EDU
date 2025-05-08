@@ -2,40 +2,56 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
 <?import javafx.geometry.Insets?>
-<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.example.bd_edu.controllers.PreguntaOrdenarController"
       spacing="10" alignment="CENTER">
+
     <padding>
         <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
 
     <Label text="Crear Pregunta de Ordenar" style="-fx-font-size: 16px;"/>
 
-    <!-- Campo para ingresar el enunciado de la pregunta -->
     <HBox spacing="10" alignment="CENTER_LEFT">
         <Label text="Enunciado:"/>
-        <TextField fx:id="enunciadoField" promptText="Ingrese el enunciado"
-                   styleClass="text-field" HBox.hgrow="ALWAYS"/>
-    </HBox>
-
-    <!-- Campo para ingresar las opciones a ordenar -->
-    <HBox spacing="10" alignment="CENTER_LEFT">
-        <Label text="Opción 1:"/>
-        <TextField fx:id="opcion1Field" promptText="Ingrese la primera opción"
-                   styleClass="text-field" HBox.hgrow="ALWAYS"/>
+        <TextField fx:id="enunciadoField" promptText="Ingrese el enunciado" HBox.hgrow="ALWAYS"/>
     </HBox>
 
     <HBox spacing="10" alignment="CENTER_LEFT">
-        <Label text="Opción 2:"/>
-        <TextField fx:id="opcion2Field" promptText="Ingrese la segunda opción"
-                   styleClass="text-field" HBox.hgrow="ALWAYS"/>
+        <Label text="Elemento 1:"/>
+        <TextField fx:id="opcion1Field" promptText="Ingrese elemento 1" HBox.hgrow="ALWAYS"/>
     </HBox>
 
-    <!-- Botón para guardar la pregunta -->
-    <Button fx:id="guardarButton" text="Guardar Pregunta" onAction="#guardarPregunta" styleClass="button"/>
+    <HBox spacing="20" alignment="CENTER">
+        <Button text="Cargar Elementos" onAction="#almacenarElemento"/>
+    </HBox>
 
-    <!-- Botón para regresar -->
-    <Button fx:id="volverButton" text="Regresar" onAction="#volver" styleClass="boton-regresar"/>
+    <TableView fx:id="tablaOrdenamientos" prefHeight="200" prefWidth="400">
+        <columns>
+            <TableColumn fx:id="columnaElemento" text="Elemento" prefWidth="380"/>
+        </columns>
+    </TableView>
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Estado:"/>
+        <ComboBox fx:id="comboEstado" promptText="Seleccione estado" prefWidth="150"/>
+        <Label text="Tema:"/>
+        <ComboBox fx:id="comboTema" promptText="Seleccione tema" prefWidth="150"/>
+    </HBox>
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Porcentaje:"/>
+        <TextField fx:id="porcentajeField" promptText="Ingrese porcentaje" prefWidth="100"/>
+        <Label text="Tiempo (segundos):"/>
+        <TextField fx:id="tiempoField" promptText="Tiempo" prefWidth="100"/>
+    </HBox>
+
+    <HBox spacing="20" alignment="CENTER">
+        <Button text="Guardar Pregunta" onAction="#guardarPregunta"/>
+        <Button text="Volver" onAction="#volver"/>
+    </HBox>
+
 </VBox>

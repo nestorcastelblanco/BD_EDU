@@ -102,7 +102,6 @@ public class PreguntaFalsoVerdaderoController {
         limpiarCampos();
     }
 
-
     private void limpiarCampos() {
         enunciadoField.clear();
         verdaderoRadio.setSelected(false);

@@ -344,4 +344,85 @@ public class Bd_Edu {
             }
         }
     }
+
+    //
+    // METODOS DE ALMACENAMIENTO DE EMPAREJAR
+    //
+
+    // Método para crear una pregunta de emparejamiento
+    public int crearPreguntaEmparejar(String enunciado, double porcentaje, String tipo, String estado, int tiempoLimite, int idBanco, int idTema) {
+        int idPregunta = -1;
+        String sql = "{ call CREAR_PREGUNTA_EMPAREJAR(?,?,?,?,?,?,?,?) }";
+
+        try (CallableStatement cs = connection.prepareCall(sql)) {
+            cs.setString(1, enunciado);   // p_enunciado
+            cs.setDouble(2, porcentaje);  // p_porcentaje
+            cs.setString(3, tipo);        // p_tipo  <--- FALTABA
+            cs.setString(4, estado);      // p_estado
+            cs.setInt(5, tiempoLimite);   // p_tiempo
+            cs.setInt(6, idBanco);        // p_idBanco
+            cs.setInt(7, idTema);         // p_idTema
+            cs.registerOutParameter(8, Types.INTEGER); // p_id_pregunta OUT
+
+            cs.execute();
+            idPregunta = cs.getInt(8);
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "Error al guardar pregunta de emparejamiento", e);
+        }
+        return idPregunta;
+    }
+
+
+    // Método para guardar cada par de emparejamiento (A, B)
+    public void guardarRespuestaEmparejar(int idPregunta, String textoA, String textoB) {
+        String sql = "{ call GUARDAR_RESPUESTA_EMPAREJAR(?,?,?) }";
+
+        try (CallableStatement cs = connection.prepareCall(sql)) {
+            cs.setInt(1, idPregunta);
+            cs.setString(2, textoA);
+            cs.setString(3, textoB);
+
+            cs.execute();
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "Error al guardar par de emparejamiento (ID_PREGUNTA: " + idPregunta + ", A: " + textoA + ", B: " + textoB + ")", e);
+        }
+    }
+
+    //CREAR PREGUNTA ORDENAR
+
+    // Método para crear una pregunta de ordenamiento
+    public int crearPreguntaOrdenar(String enunciado, double porcentaje, String estado, int tiempoLimite, String tipo,  int idBanco, int idTema) {
+        int idPregunta = -1;
+        String sql = "{ call CREAR_PREGUNTA_ORDENAR(?,?,?,?,?,?,?,?) }";
+
+        try (CallableStatement cs = connection.prepareCall(sql)) {
+            cs.setString(1, enunciado);   // p_enunciado
+            cs.setDouble(2, porcentaje);  // p_porcentaje
+            cs.setString(3, tipo);        // p_tipo  <--- FALTABA
+            cs.setString(4, estado);      // p_estado
+            cs.setInt(5, tiempoLimite);   // p_tiempo
+            cs.setInt(6, idBanco);        // p_idBanco
+            cs.setInt(7, idTema);         // p_idTema
+            cs.registerOutParameter(8, Types.INTEGER); // p_id_pregunta OUT
+
+            cs.execute();
+            idPregunta = cs.getInt(8);
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "Error al guardar pregunta de emparejamiento", e);
+        }
+        return idPregunta;
+    }
+
+    public void guardarRespuestaOrdenar(int idPregunta, String respuestaConcatenada) {
+        String sql = "{ call GUARDAR_RESPUESTA_ORDENADA(?, ?) }";
+
+        try (CallableStatement cs = connection.prepareCall(sql)) {
+            cs.setInt(1, idPregunta);
+            cs.setString(2, respuestaConcatenada);
+            cs.execute();
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "Error al guardar respuesta ordenada", e);
+        }
+    }
+
 }

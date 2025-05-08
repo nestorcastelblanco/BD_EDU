@@ -70,7 +70,7 @@ public class PreguntaCompletarController {
         }
 
         // Guardar pregunta
-        bd_edu.crearPreguntaCompletar(pregunta, tipo, porcentaje, respuesta, estado, tiempo, idBanco, idTema);
+        bd_edu.crearPreguntaCompletar(pregunta, "Completar", porcentaje, respuesta, estado, tiempo, idBanco, idTema);
         mostrarAlerta("Éxito", "Pregunta guardada correctamente.");
 
         limpiarCampos();

@@ -1,78 +1,117 @@
 package com.example.bd_edu.controllers;
 
 import com.example.bd_edu.Bd_Edu;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Button;
+import com.example.bd_edu.model.Emparejamiento;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+import javafx.beans.property.SimpleStringProperty;
+
+import java.util.List;
 
 public class PreguntaEmparejarController {
 
-    // Referencias a los elementos de la interfaz
     @FXML
-    private TextField enunciadoField;
+    private TextField enunciadoField, opcion1Field, opcion2Field, porcentajeField, tiempoField;
 
     @FXML
-    private ListView<String> listaA;
+    private ListView<String> listaA, listaB;  // Ya no se usan pero los dejo si quieres borrar luego
 
     @FXML
-    private ListView<String> listaB;
+    private ComboBox<String> comboEstado, comboTema;
 
     @FXML
-    private Button guardarButton;
+    private Button guardarButton, volverButton;
 
     @FXML
-    private Button volverButton;
+    private TableView<Emparejamiento> tablaEmparejamientos;
 
-    // Método para inicializar las listas de emparejamiento
+    @FXML
+    private TableColumn<Emparejamiento, String> columnaA, columnaB;
+
+    private ObservableList<Emparejamiento> listaEmparejamientos = FXCollections.observableArrayList();
+
+    Bd_Edu bd_edu = Bd_Edu.getInstance();
+
+    @FXML
     public void initialize() {
-//        ObservableList<String> listaAItems = FXCollections.observableArrayList("Elemento A1", "Elemento A2", "Elemento A3");
-//        ObservableList<String> listaBItems = FXCollections.observableArrayList("Elemento B1", "Elemento B2", "Elemento B3");
-//
-//        listaA.setItems(listaAItems);
-//        listaB.setItems(listaBItems);
+        comboEstado.setItems(FXCollections.observableArrayList("Activo", "Inactivo"));
+
+        // Cargar temas desde BD
+        List<String> temas = bd_edu.obtenerTemasDesdeBD();
+        comboTema.setItems(FXCollections.observableArrayList(temas));
+
+        // Configurar tabla
+        columnaA.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getOpcionA()));
+        columnaB.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getOpcionB()));
+        tablaEmparejamientos.setItems(listaEmparejamientos);
     }
 
-    // Método para guardar la pregunta
+    // Almacenar una pareja en la tabla
+    @FXML
+    public void almacenarPareja(ActionEvent actionEvent) {
+        String opcionA = opcion1Field.getText();
+        String opcionB = opcion2Field.getText();
+
+        if (opcionA.isEmpty() || opcionB.isEmpty()) {
+            System.out.println("Debe ingresar ambas opciones.");
+            return;
+        }
+
+        listaEmparejamientos.add(new Emparejamiento(opcionA, opcionB));
+        opcion1Field.clear();
+        opcion2Field.clear();
+    }
+
+    // Guardar la pregunta y sus emparejamientos
     @FXML
     private void guardarPregunta() {
         String enunciado = enunciadoField.getText();
+        String estado = comboEstado.getValue();
+        String temaSeleccionado = comboTema.getValue();
+        String porcentajeStr = porcentajeField.getText();
+        String tiempoStr = tiempoField.getText();
 
-        // Verifica si el enunciado está vacío
-        if (enunciado.isEmpty()) {
-            System.out.println("Debe ingresar un enunciado.");
+        if (enunciado.isEmpty() || estado == null || temaSeleccionado == null ||
+                porcentajeStr.isEmpty() || tiempoStr.isEmpty() || listaEmparejamientos.isEmpty()) {
+            System.out.println("Debe completar todos los campos y cargar al menos una pareja.");
             return;
         }
 
-        // Lógica para obtener los emparejamientos entre las listas
-        // Aquí asumimos que los elementos se emparejan en el orden de las listas A y B
-        ObservableList<String> listaAItems = listaA.getItems();
-        ObservableList<String> listaBItems = listaB.getItems();
+        int idTema = bd_edu.obtenerIdTema(temaSeleccionado);
+        int idBanco = bd_edu.obtenerIdBanco(idTema);  // Asumo que lo tienes implementado
+        double porcentaje = Double.parseDouble(porcentajeStr);
+        int tiempo = Integer.parseInt(tiempoStr);
 
-        if (listaAItems.size() != listaBItems.size()) {
-            System.out.println("El número de elementos en ambas listas debe ser igual.");
-            return;
+        // Crear pregunta
+        int idPregunta = bd_edu.crearPreguntaEmparejar(enunciado, porcentaje, "Emparejar", estado, tiempo, idBanco, idTema);
+
+        // Guardar cada pareja como respuesta
+        for (Emparejamiento emp : listaEmparejamientos) {
+            bd_edu.guardarRespuestaEmparejar(idPregunta, emp.getOpcionA(), emp.getOpcionB());
         }
 
-        // Empareja los elementos de ambas listas
-        System.out.println("Pregunta guardada:");
-        System.out.println("Enunciado: " + enunciado);
-        for (int i = 0; i < listaAItems.size(); i++) {
-            String emparejamiento = listaAItems.get(i) + " - " + listaBItems.get(i);
-            System.out.println("Emparejamiento: " + emparejamiento);
-        }
+        System.out.println("Pregunta y emparejamientos guardados exitosamente.");
+        limpiarCampos();
     }
 
-    // Método para volver a la pantalla anterior
-
+    // Método para volver
     @FXML
     private void volver(ActionEvent actionEvent) {
-        Object evt = actionEvent.getSource();
-        if (evt.equals(volverButton)) {
-            Bd_Edu.loadStage("/ventanas/seleccionarTipoPregunta.fxml", actionEvent);
-        }
+        Bd_Edu.loadStage("/ventanas/seleccionarTipoPregunta.fxml", actionEvent);
+    }
+
+    // Limpiar todo después de guardar
+    private void limpiarCampos() {
+        enunciadoField.clear();
+        opcion1Field.clear();
+        opcion2Field.clear();
+        porcentajeField.clear();
+        tiempoField.clear();
+        comboEstado.getSelectionModel().clearSelection();
+        comboTema.getSelectionModel().clearSelection();
+        listaEmparejamientos.clear();
     }
 }
