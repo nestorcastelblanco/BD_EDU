@@ -1,15 +1,22 @@
 package com.example.bd_edu;
 
+import com.example.bd_edu.model.Curso;
+import com.example.bd_edu.model.Examen;
+import com.example.bd_edu.model.Pregunta;
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import lombok.Getter;
+import oracle.jdbc.OracleTypes;
 
-import java.lang.reflect.Type;
+import java.math.BigDecimal;
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -25,6 +32,8 @@ public class Bd_Edu {
 
     private String rolUsuario;
 
+    private int idUsuario;
+
     private static Bd_Edu bd_edu;
 
     public static Bd_Edu getInstance() {
@@ -32,6 +41,10 @@ public class Bd_Edu {
             bd_edu = new Bd_Edu();
         }
         return bd_edu;
+    }
+
+    public int retornarIdUsuario() {
+        return idUsuario;
     }
 
     private Bd_Edu() {
@@ -49,21 +62,25 @@ public class Bd_Edu {
     }
 
     public boolean iniciarSesion(String usuario, String clave) {
-        try (CallableStatement cs = connection.prepareCall("{ call validar_usuario_con_rol(?, ?, ?, ?) }")) {
+        try (CallableStatement cs = connection.prepareCall("{ call validar_usuario_con_rol(?, ?, ?, ?, ?) }")) {
 
             cs.setString(1, usuario);
             cs.setString(2, clave);
 
             cs.registerOutParameter(3, Types.INTEGER);
             cs.registerOutParameter(4, Types.VARCHAR);
-
+            cs.registerOutParameter(5, Types.INTEGER);
             cs.execute();
 
             int resultado = cs.getInt(3);
             String rol = cs.getString(4);
+            int idUsuario = cs.getInt(5);
 
             if (resultado > 0 && rol != null && !rol.isEmpty()) {
                 this.rolUsuario = rol;
+                this.idUsuario = idUsuario;
+                System.out.println("Rol: " + rol);
+                System.out.println("Id: " + idUsuario);
                 return true;
             } else {
                 LOGGER.warning("Usuario o contraseña incorrectos.");
@@ -125,9 +142,6 @@ public class Bd_Edu {
 
     /**
      * Método para almacenar la respuesta de pregunta Completar
-     * @param id_pregunta
-     * @param respuesta
-     * @param esCorrecta
      */
     public void guardarRespuestaCompletar(int id_pregunta, String respuesta, boolean esCorrecta) {
         String sql = "{ call guardar_respuesta(?,?,?) }";
@@ -143,14 +157,6 @@ public class Bd_Edu {
 
     /**
      * Método para almacenar una pregunta de completar
-     * @param pregunta
-     * @param tipo
-     * @param porcentaje
-     * @param respuesta
-     * @param estado
-     * @param tiempo
-     * @param id_banco
-     * @param id_tema
      */
     public void crearPreguntaCompletar(String pregunta, String tipo, double porcentaje, String respuesta, String estado, int tiempo, int id_banco, int id_tema) {
         int id_pregunta = -1;
@@ -175,9 +181,8 @@ public class Bd_Edu {
 
     /**
      * Método para cargar ventanas
-     * @param url
-     * @param event
-     */
+     *
+     **/
     public static void loadStage(String url, Event event) {
         try {
             ((Node) (event.getSource())).getScene().getWindow().hide();
@@ -425,4 +430,231 @@ public class Bd_Edu {
         }
     }
 
+    public List<Pregunta> obtenerPreguntasPorTipoYTema(String tipo, String idTema) {
+        List<Pregunta> preguntas = new ArrayList<>();
+        int idTemas = obtenerIdTema(idTema);
+        String sql = "{ call OBTENER_PREGUNTAS_TIPO_TEMA(?, ?, ?) }";
+
+        try (CallableStatement cs = connection.prepareCall(sql)) {
+            cs.setString(1, tipo);
+            cs.setInt(2, idTemas);
+            cs.registerOutParameter(3, OracleTypes.CURSOR);
+
+            cs.execute();
+
+            try (ResultSet rs = (ResultSet) cs.getObject(3)) {
+                while (rs.next()) {
+                    Pregunta pregunta = new Pregunta();
+                    pregunta.setId(rs.getInt("ID_PREGUNTA"));
+                    pregunta.setTexto(rs.getString("TEXTO"));
+                    pregunta.setTipo(rs.getString("TIPO"));
+                    pregunta.setPorcentaje(rs.getBigDecimal("PORCENTAJE"));
+                    pregunta.setTiempoLimite(rs.getInt("TIEMPO_LIMITE"));
+                    pregunta.setIdBanco(rs.getInt("ID_BANCO"));
+                    pregunta.setIdTema(rs.getInt("ID_TEMA"));
+                    pregunta.setEstado(rs.getString("ESTADO"));
+                    preguntas.add(pregunta);
+                }
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "Error al obtener preguntas por tipo y tema", e);
+        }
+
+        return preguntas;
+    }
+
+    public Pregunta obtenerPreguntaPorEnunciado(String enunciadoSeleccionado) {
+        String sql = "{ call OBTENER_PREGUNTA_POR_ENUNCIADO(?, ?) }";
+        Pregunta pregunta = null;
+
+        try (CallableStatement cs = connection.prepareCall(sql)) {
+            cs.setString(1, enunciadoSeleccionado);
+            cs.registerOutParameter(2, OracleTypes.CURSOR);
+
+            cs.execute();
+
+            try (ResultSet rs = (ResultSet) cs.getObject(2)) {
+                if (rs.next()) {
+                    pregunta = new Pregunta();
+                    pregunta.setId(rs.getInt("ID_PREGUNTA"));
+                    pregunta.setTexto(rs.getString("TEXTO"));
+                    pregunta.setTipo(rs.getString("TIPO"));
+                    pregunta.setPorcentaje(rs.getBigDecimal("PORCENTAJE"));
+                    pregunta.setTiempoLimite(rs.getInt("TIEMPO_LIMITE"));
+                    pregunta.setIdBanco(rs.getInt("ID_BANCO"));
+                    pregunta.setIdTema(rs.getInt("ID_TEMA"));
+                    pregunta.setEstado(rs.getString("ESTADO"));
+                }
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "Error al obtener pregunta por enunciado", e);
+        }
+
+        return pregunta;
+    }
+
+    public int crearExamen(String titulo, String descripcion, String categoria, int idTema, int idDocente, int preguntasEstudiante) {
+        String sql = "{ call CREAR_EXAMEN(?, ?, ?, ?, ?, ?, ?) }";
+        int idGenerado = -1;
+
+        try (CallableStatement cs = connection.prepareCall(sql)) {
+            cs.setString(1, titulo);
+            cs.setString(2, descripcion);
+            cs.setString(3, categoria);
+            cs.setInt(4, idTema);
+            cs.setInt(5, idDocente);
+            cs.setInt(6, preguntasEstudiante);
+
+            cs.registerOutParameter(7, Types.INTEGER);
+
+            cs.execute();
+            idGenerado = cs.getInt(7);
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "Error al crear examen", e);
+        }
+
+        return idGenerado;
+    }
+
+    public List<Pregunta> obtenerPreguntasPorCategoria(String categoria) {
+        List<Pregunta> preguntas = new ArrayList<>();
+        String sql = "{ call OBTENER_PREGUNTAS_POR_TIPO(?, ?) }";
+
+        try (CallableStatement cs = connection.prepareCall(sql)) {
+            cs.setString(1, categoria);
+            cs.registerOutParameter(2, OracleTypes.CURSOR);
+
+            cs.execute();
+
+            try (ResultSet rs = (ResultSet) cs.getObject(2)) {
+                while (rs.next()) {
+                    Pregunta pregunta = new Pregunta();
+                    pregunta.setId(rs.getInt("ID_PREGUNTA"));
+                    pregunta.setTexto(rs.getString("TEXTO"));
+                    pregunta.setTipo(rs.getString("TIPO"));
+                    pregunta.setPorcentaje(rs.getBigDecimal("PORCENTAJE"));
+                    pregunta.setTiempoLimite(rs.getInt("TIEMPO_LIMITE"));
+                    pregunta.setIdBanco(rs.getInt("ID_BANCO"));
+                    pregunta.setIdTema(rs.getInt("ID_TEMA"));
+                    pregunta.setEstado(rs.getString("ESTADO"));
+                    preguntas.add(pregunta);
+                }
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "Error al obtener preguntas por categoría", e);
+        }
+
+        return preguntas;
+    }
+
+    public void crearPreguntaExamen(int idExamen, int id, BigDecimal porcentaje) {
+        List<Pregunta> preguntas = new ArrayList<>();
+        String sql = "{ call CREAR_PREGUNTA_EXAMEN(?, ?, ?) }";
+
+        try (CallableStatement cs = connection.prepareCall(sql)) {
+            cs.setInt(1, idExamen);
+            cs.setInt(2, id);
+            cs.setBigDecimal(3, porcentaje);
+            cs.execute();
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "Error al obtener preguntas por categoría", e);
+        }
+    }
+
+    public void guardarProgramacionExamen(int idExamen, LocalDate fecha, LocalTime hora,
+                                          int duracionMinutos, int idCurso, BigDecimal umbralAprobacion) {
+        String sql = "{ call GUARDAR_PROGRAMACION_EXAMEN(?, ?, ?, ?, ?, ?) }";
+        try (Connection connection = getConnection();  // o tu forma de obtener conexión
+             CallableStatement cs = connection.prepareCall(sql)) {
+
+            cs.setInt(1, idExamen);
+            cs.setDate(2, java.sql.Date.valueOf(fecha));
+            cs.setString(3, hora.toString());
+            cs.setInt(4, duracionMinutos);
+            cs.setInt(5, idCurso);
+            cs.setBigDecimal(6, umbralAprobacion);
+            cs.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al guardar la programación del examen", e);
+        }
+    }
+
+    public List<Pregunta> obtenerPreguntasPorExamen(int idExamen) {
+        List<Pregunta> preguntas = new ArrayList<>();
+        String sql = "{ call obtener_preguntas_por_examen(?, ?) }";
+
+        try (CallableStatement cs = connection.prepareCall(sql)) {
+            cs.setInt(1, idExamen);
+            cs.registerOutParameter(2, OracleTypes.CURSOR);
+            cs.execute();
+
+            try (ResultSet rs = (ResultSet) cs.getObject(2)) {
+                while (rs.next()) {
+                    Pregunta pregunta = new Pregunta();
+                    pregunta.setId(rs.getInt("ID_PREGUNTA"));
+                    pregunta.setTexto(rs.getString("TEXTO"));
+                    pregunta.setTipo(rs.getString("TIPO"));
+                    pregunta.setPorcentaje(BigDecimal.valueOf(rs.getDouble("PORCENTAJE")));
+                    pregunta.setTiempoLimite(rs.getInt("TIEMPO_LIMITE"));
+                    preguntas.add(pregunta);
+                }
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "Error al obtener preguntas del examen", e);
+        }
+
+        return preguntas;
+    }
+
+
+    public List<Examen> obtenerExamenes() {
+        List<Examen> examenes = new ArrayList<>();
+        String sql = "{ call obtener_examenes_docente(?, ?) }";
+
+        try (CallableStatement cs = connection.prepareCall(sql)) {
+            cs.setInt(1, idUsuario); // Asegúrate de tener este valor correctamente
+            cs.registerOutParameter(2, OracleTypes.CURSOR);
+            cs.execute();
+
+            try (ResultSet rs = (ResultSet) cs.getObject(2)) {
+                while (rs.next()) {
+                    Examen examen = new Examen();
+                    examen.setIdExamen(rs.getInt("ID_EXAMEN"));
+                    examen.setTitulo(rs.getString("TITULO"));
+                    examen.setTiempoTotal(rs.getInt("TIEMPO_TOTAL"));
+                    examen.setIdCurso(rs.getInt("ID_CURSO"));
+                    examen.setUmbralAprobacion(rs.getBigDecimal("UMBRAL_APROBACION"));
+
+                    examenes.add(examen);
+                }
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "Error al obtener exámenes del docente", e);
+        }
+
+        return examenes;
+    }
+
+    public List<Curso> obtenerCursos() {
+        List<Curso> cursos = new ArrayList<>();
+        String sql = "{ call obtener_cursos(?) }";
+
+        try (CallableStatement cs = connection.prepareCall(sql)) {
+            cs.registerOutParameter(1, OracleTypes.CURSOR);
+            cs.execute();
+
+            try (ResultSet rs = (ResultSet) cs.getObject(1)) {
+                while (rs.next()) {
+                    Curso curso = new Curso();
+                    curso.setId(rs.getInt("ID_CURSO"));
+                    curso.setNombre(rs.getString("NOMBRE"));
+                    curso.setDescripcion(rs.getString("DESCRIPCION"));
+                    cursos.add(curso);
+                }
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "Error al obtener exámenes del docente", e);
+        }
+        return cursos;
+    }
 }

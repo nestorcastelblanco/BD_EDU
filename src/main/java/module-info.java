@@ -13,4 +13,6 @@ module com.example.bd_edu {
     exports com.example.bd_edu;
     exports com.example.bd_edu.controllers;
     opens com.example.bd_edu.controllers to javafx.fxml;
+    exports com.example.bd_edu.model;
+    opens com.example.bd_edu.model to javafx.fxml;
 }

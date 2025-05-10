@@ -12,7 +12,7 @@ import java.io.IOException;
 public class SeleccionarTipoPreguntaController {
 
     @FXML
-    private Button btnUnica, btnMultiple, btnVF, btnEmparejar, btnOrdenar, btnCompletar;
+    private Button btnUnica, btnMultiple, btnVF, btnEmparejar, btnOrdenar, btnCompletar, btnVolver;
 
     @FXML
     public void initialize() {
@@ -22,6 +22,7 @@ public class SeleccionarTipoPreguntaController {
         btnEmparejar.setOnAction(e -> abrirVentana("emparejar.fxml"));
         btnOrdenar.setOnAction(e -> abrirVentana("ordenar.fxml"));
         btnCompletar.setOnAction(e -> abrirVentana("completar.fxml"));
+        btnVolver.setOnAction(e -> abrirVentana("menuDocente.fxml"));
     }
 
     private void abrirVentana(String fxml) {

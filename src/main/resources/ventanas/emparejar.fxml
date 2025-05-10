@@ -6,14 +6,14 @@
 
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.bd_edu.controllers.PreguntaOrdenarController"
+      fx:controller="com.example.bd_edu.controllers.PreguntaEmparejarController"
       spacing="10" alignment="CENTER">
 
     <padding>
         <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
 
-    <Label text="Crear Pregunta de Ordenar" style="-fx-font-size: 16px;"/>
+    <Label text="Crear Pregunta de Emparejar" style="-fx-font-size: 16px;"/>
 
     <HBox spacing="10" alignment="CENTER_LEFT">
         <Label text="Enunciado:"/>
@@ -21,22 +21,23 @@
     </HBox>
 
     <HBox spacing="10" alignment="CENTER_LEFT">
-        <Label text="Elemento 1:"/>
-        <TextField fx:id="opcion1Field" promptText="Ingrese el primer elemento" HBox.hgrow="ALWAYS"/>
+        <Label text="Opción A:"/>
+        <TextField fx:id="opcion1Field" promptText="Ingrese la opción A" HBox.hgrow="ALWAYS"/>
     </HBox>
 
     <HBox spacing="10" alignment="CENTER_LEFT">
-        <Label text="Elemento 2:"/>
-        <TextField fx:id="opcion2Field" promptText="Ingrese el segundo elemento" HBox.hgrow="ALWAYS"/>
+        <Label text="Opción B:"/>
+        <TextField fx:id="opcion2Field" promptText="Ingrese la opción B" HBox.hgrow="ALWAYS"/>
     </HBox>
 
     <HBox spacing="20" alignment="CENTER">
-        <Button text="Añadir Elemento" onAction="#almacenarElemento"/>
+        <Button text="Cargar Pareja" onAction="#almacenarPareja"/>
     </HBox>
 
-    <TableView fx:id="tablaOrdenamientos" prefHeight="200" prefWidth="400">
+    <TableView fx:id="tablaEmparejamientos" prefHeight="200" prefWidth="400">
         <columns>
-            <TableColumn fx:id="columnaElemento" text="Elemento" prefWidth="380"/>
+            <TableColumn fx:id="columnaA" text="Opción A" prefWidth="190"/>
+            <TableColumn fx:id="columnaB" text="Opción B" prefWidth="190"/>
         </columns>
     </TableView>
 

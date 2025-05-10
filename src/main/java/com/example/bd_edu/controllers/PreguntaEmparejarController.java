@@ -17,9 +17,6 @@ public class PreguntaEmparejarController {
     private TextField enunciadoField, opcion1Field, opcion2Field, porcentajeField, tiempoField;
 
     @FXML
-    private ListView<String> listaA, listaB;  // Ya no se usan pero los dejo si quieres borrar luego
-
-    @FXML
     private ComboBox<String> comboEstado, comboTema;
 
     @FXML

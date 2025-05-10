@@ -33,6 +33,7 @@
                         styleClass="text-field"/>
         </HBox>
 
+
         <!-- Hora -->
         <HBox spacing="10" alignment="CENTER_LEFT">
             <Label text="Hora:"/>
@@ -45,6 +46,21 @@
                      styleClass="spinner"/>
         </HBox>
 
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Label text="Tiempo Limite: "/>
+            <TextField fx:id="tiempoLimite" promptText="Minutos" styleClass="text-field"/>
+        </HBox>
+
+
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Label layoutX="208.0" layoutY="106.0" text="Curso" />
+            <ComboBox fx:id="cursoChoice" layoutX="208.0" layoutY="123.0" prefWidth="150.0" />
+        </HBox>
+
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Label text="Umbral aprobación: "/>
+            <TextField fx:id="umbralAprobacion" promptText="aprobacion" styleClass="text-field"/>
+        </HBox>
         <!-- Botón principal -->
         <Button fx:id="programarButton"
                 text="Programar Examen"

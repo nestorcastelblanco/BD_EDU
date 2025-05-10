@@ -14,5 +14,6 @@
     <Button fx:id="btnEmparejar" text="Emparejar"/>
     <Button fx:id="btnOrdenar" text="Ordenar"/>
     <Button fx:id="btnCompletar" text="Completar"/>
+    <Button fx:id="btnVolver" text="Volver"/>
 </VBox>
 
