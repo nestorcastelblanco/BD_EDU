@@ -13,7 +13,7 @@ import java.util.List;
 public class PreguntaOrdenarController {
 
     @FXML
-    private TextField enunciadoField;
+    private TextArea enunciadoField;
 
     @FXML
     private TextField opcion1Field;

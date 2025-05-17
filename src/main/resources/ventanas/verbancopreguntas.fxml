@@ -1,38 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml"
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.control.cell.CheckBoxTableCell?>
+<?import javafx.util.Callback?>
+<AnchorPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.example.bd_edu.controllers.VerBancoPreguntasController"
-            prefWidth="800.0" prefHeight="500.0"
+            prefWidth="900.0" prefHeight="600.0"
+            styleClass="anchor-pane"
             stylesheets="@../estilos.css">
 
-    <VBox spacing="10"
-          AnchorPane.topAnchor="10"
-          AnchorPane.leftAnchor="10"
-          AnchorPane.rightAnchor="10"
-          AnchorPane.bottomAnchor="10">
+    <VBox spacing="15" alignment="TOP_CENTER"
+          AnchorPane.topAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.bottomAnchor="20">
 
-        <!-- Título -->
-        <Label text="Banco de Preguntas"
-               styleClass="label-titulo"/>
+        <!-- Header with title and search/filter controls -->
+        <HBox alignment="CENTER_LEFT" spacing="20" styleClass="header-box">
+            <Label text="Banco de Preguntas" styleClass="label-titulo">
+                <font>
+                    <Font name="Segoe UI" size="22"/>
+                </font>
+            </Label>
 
-        <!-- Tabla de preguntas -->
-        <TableView fx:id="tablaPreguntas" prefHeight="440">
+            <TextField fx:id="buscarField" promptText="Buscar preguntas..." styleClass="search-field"/>
+            <ComboBox fx:id="filtroTipo" promptText="Filtrar por tipo" styleClass="combo-box" prefWidth="150"/>
+        </HBox>
+
+        <!-- Questions table -->
+        <TableView fx:id="tablaPreguntas" prefHeight="450" styleClass="table-view">
             <columns>
-                <TableColumn fx:id="colId"          text="ID"               prefWidth="50"/>
-                <TableColumn fx:id="colTexto"       text="Texto de la Pregunta" prefWidth="300"/>
-                <TableColumn fx:id="colTipo"        text="Tipo"             prefWidth="120"/>
-                <TableColumn fx:id="colPorcentaje"  text="&#37; Nota"        prefWidth="80"/>
-                <TableColumn fx:id="colAutor"       text="Autor"            prefWidth="150"/>
-                <TableColumn fx:id="colPublica"     text="Pública"          prefWidth="80"/>
+                <TableColumn fx:id="colId" text="ID" prefWidth="60" styleClass="table-column"/>
+                <TableColumn fx:id="colTexto" text="Texto de la Pregunta" prefWidth="400" styleClass="table-column"/>
+                <TableColumn fx:id="colTipo" text="Tipo" prefWidth="120" styleClass="table-column"/>
+                <TableColumn fx:id="colPorcentaje" text="%" prefWidth="80" styleClass="table-column"/>
+                <TableColumn fx:id="colAutor" text="Autor" prefWidth="150" styleClass="table-column"/>
+                <TableColumn fx:id="colPublica" text="Pública" prefWidth="80" styleClass="table-column">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="publica" />
+                    </cellValueFactory>
+                </TableColumn>
             </columns>
         </TableView>
 
-        <!-- Botón de regresar -->
-        <Button fx:id="volverButton"
-                text="Regresar"
-                onAction="#volver"
-                styleClass="boton-regresar"/>
+        <!-- Bottom controls -->
+        <HBox spacing="20" alignment="CENTER_RIGHT">
+            <Button fx:id="nuevaPreguntaButton" text="Nueva Pregunta" styleClass="button" prefWidth="150"/>
+            <Button fx:id="volverButton" text="Regresar" onAction="#volver" styleClass="boton-regresar" prefWidth="150"/>
+        </HBox>
     </VBox>
 </AnchorPane>

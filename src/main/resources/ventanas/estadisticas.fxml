@@ -2,41 +2,57 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml"
+<AnchorPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.example.bd_edu.controllers.EstadisticasController"
-            prefHeight="500.0" prefWidth="800.0"
+            prefHeight="550.0" prefWidth="1000.0"
+            styleClass="anchor-pane"
             stylesheets="@../estilos.css">
 
-    <VBox spacing="15"
-          AnchorPane.topAnchor="10"
-          AnchorPane.leftAnchor="10"
-          AnchorPane.rightAnchor="10"
-          AnchorPane.bottomAnchor="10">
+    <!-- Panel principal -->
+    <VBox spacing="15" alignment="TOP_CENTER"
+          AnchorPane.topAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20">
 
-        <Label text="Estadísticas de Exámenes"
-               styleClass="label-titulo"/>
+        <!-- Título principal -->
+        <Label text="Estadísticas de Exámenes" styleClass="label-titulo">
+            <font>
+                <Font name="Segoe UI" size="22"/>
+            </font>
+        </Label>
 
-        <TableView fx:id="tablaEstadisticas"
-                   prefHeight="400"
-                   styleClass="table-view">
+        <!-- Tabla de estadísticas -->
+        <TableView fx:id="tablaEstadisticas" prefHeight="400" prefWidth="960">
             <columns>
-                <TableColumn fx:id="colNombre" text="Estudiante"/>
-                <TableColumn fx:id="colGrupo" text="Grupo"/>
-                <TableColumn fx:id="colExamen" text="Examen"/>
-                <TableColumn fx:id="colNota" text="Nota"/>
-                <TableColumn fx:id="colCorrectas" text="Correctas"/>
-                <TableColumn fx:id="colIncorrectas" text="Incorrectas"/>
+                <TableColumn fx:id="colNombre" text="Estudiante" prefWidth="200" styleClass="table-column"/>
+                <TableColumn fx:id="colGrupo" text="Grupo" prefWidth="150" styleClass="table-column"/>
+                <TableColumn fx:id="colExamen" text="Examen" prefWidth="200" styleClass="table-column"/>
+                <TableColumn fx:id="colNota" text="Nota" prefWidth="100" styleClass="table-column"/>
+                <TableColumn fx:id="colCorrectas" text="Respuestas Correctas" prefWidth="150" styleClass="table-column"/>
+                <TableColumn fx:id="colIncorrectas" text="Respuestas Incorrectas" prefWidth="150" styleClass="table-column"/>
             </columns>
         </TableView>
 
-        <Label fx:id="labelResumen"
-               text="Promedio general: -"
-               styleClass="label"/>
+        <!-- Panel inferior con resumen y botón -->
+        <HBox spacing="20" alignment="CENTER_LEFT">
+            <!-- Resumen estadístico -->
+            <Label fx:id="labelResumen" text="Promedio general: -" styleClass="label-subtitulo">
+                <font>
+                    <Font size="16"/>
+                </font>
+                <padding>
+                    <Insets left="10"/>
+                </padding>
+            </Label>
 
-        <Button fx:id="volverButton"
-                text="Regresar"
-                onAction="#volver"
-                styleClass="boton-regresar"/>
+            <!-- Espacio flexible para empujar el botón a la derecha -->
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <!-- Botón de regresar -->
+            <Button fx:id="volverButton" text="Regresar" onAction="#volver"
+                    styleClass="boton-regresar" prefWidth="120" prefHeight="35"/>
+        </HBox>
     </VBox>
 </AnchorPane>

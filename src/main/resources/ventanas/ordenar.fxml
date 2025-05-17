@@ -2,56 +2,89 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
 
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.bd_edu.controllers.PreguntaOrdenarController"
-      spacing="10" alignment="CENTER">
+<AnchorPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.bd_edu.controllers.PreguntaOrdenarController"
+            prefHeight="500.0" prefWidth="950.0"
+            styleClass="anchor-pane"
+            stylesheets="@../estilos.css">
 
-    <padding>
-        <Insets top="20" right="20" bottom="20" left="20"/>
-    </padding>
+    <!-- Panel principal con dos columnas -->
+    <HBox spacing="30" alignment="TOP_CENTER" AnchorPane.topAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20">
+        <!-- Panel izquierdo - Formulario -->
+        <VBox spacing="15" prefWidth="450">
+            <!-- Título -->
+            <Label text="Crear Pregunta de Ordenar" styleClass="label-titulo">
+                <font>
+                    <Font name="Segoe UI" size="20.0" />
+                </font>
+            </Label>
 
-    <Label text="Crear Pregunta de Ordenar" style="-fx-font-size: 16px;"/>
+            <!-- Campos del formulario -->
+            <GridPane hgap="10" vgap="10" prefWidth="430">
+                <columnConstraints>
+                    <ColumnConstraints prefWidth="120" halignment="RIGHT"/>
+                    <ColumnConstraints prefWidth="310" halignment="LEFT"/>
+                </columnConstraints>
 
-    <HBox spacing="10" alignment="CENTER_LEFT">
-        <Label text="Enunciado:"/>
-        <TextField fx:id="enunciadoField" promptText="Ingrese el enunciado" HBox.hgrow="ALWAYS"/>
+                <!-- Enunciado -->
+                <Label text="Enunciado:" styleClass="text-label" GridPane.rowIndex="0"/>
+                <TextArea fx:id="enunciadoField" styleClass="text-field" prefRowCount="2"
+                          GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                <!-- Elemento -->
+                <Label text="Elemento:" styleClass="text-label" GridPane.rowIndex="1"/>
+                <TextField fx:id="opcion1Field" styleClass="text-field"
+                           GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                <!-- Botón para cargar elemento -->
+                <Button text="Cargar Elemento" onAction="#almacenarElemento" styleClass="button"
+                        GridPane.rowIndex="2" GridPane.columnIndex="1" prefWidth="310" prefHeight="35"/>
+
+                <!-- Estado y Tema -->
+                <Label text="Estado:" styleClass="text-label" GridPane.rowIndex="3"/>
+                <ComboBox fx:id="comboEstado" styleClass="combo-box"
+                          GridPane.rowIndex="3" GridPane.columnIndex="1" prefWidth="200"/>
+
+                <Label text="Tema:" styleClass="text-label" GridPane.rowIndex="4"/>
+                <ComboBox fx:id="comboTema" styleClass="combo-box"
+                          GridPane.rowIndex="4" GridPane.columnIndex="1" prefWidth="200"/>
+
+                <!-- Porcentaje y Tiempo -->
+                <Label text="Porcentaje:" styleClass="text-label" GridPane.rowIndex="5"/>
+                <TextField fx:id="porcentajeField" styleClass="text-field"
+                           GridPane.rowIndex="5" GridPane.columnIndex="1" prefWidth="100"/>
+
+                <Label text="Tiempo (segundos):" styleClass="text-label" GridPane.rowIndex="6"/>
+                <TextField fx:id="tiempoField" styleClass="text-field"
+                           GridPane.rowIndex="6" GridPane.columnIndex="1" prefWidth="100"/>
+            </GridPane>
+
+            <!-- Botones -->
+            <HBox spacing="20" alignment="CENTER">
+                <Button text="Guardar Pregunta" onAction="#guardarPregunta"
+                        styleClass="button" prefWidth="200" prefHeight="35"/>
+                <Button text="Volver" onAction="#volver"
+                        styleClass="boton-regresar" prefWidth="200" prefHeight="35"/>
+            </HBox>
+        </VBox>
+
+        <!-- Panel derecho - Tabla de elementos -->
+        <VBox spacing="15" prefWidth="450">
+            <Label text="Elementos a Ordenar" styleClass="label-titulo">
+                <font>
+                    <Font name="Segoe UI" size="20.0" />
+                </font>
+            </Label>
+
+            <TableView fx:id="tablaOrdenamientos" prefHeight="350" prefWidth="450">
+                <columns>
+                    <TableColumn fx:id="columnaElemento" text="Elemento" prefWidth="450" styleClass="table-column"/>
+                </columns>
+            </TableView>
+        </VBox>
     </HBox>
-
-    <HBox spacing="10" alignment="CENTER_LEFT">
-        <Label text="Elemento 1:"/>
-        <TextField fx:id="opcion1Field" promptText="Ingrese elemento 1" HBox.hgrow="ALWAYS"/>
-    </HBox>
-
-    <HBox spacing="20" alignment="CENTER">
-        <Button text="Cargar Elementos" onAction="#almacenarElemento"/>
-    </HBox>
-
-    <TableView fx:id="tablaOrdenamientos" prefHeight="200" prefWidth="400">
-        <columns>
-            <TableColumn fx:id="columnaElemento" text="Elemento" prefWidth="380"/>
-        </columns>
-    </TableView>
-
-    <HBox spacing="10" alignment="CENTER_LEFT">
-        <Label text="Estado:"/>
-        <ComboBox fx:id="comboEstado" promptText="Seleccione estado" prefWidth="150"/>
-        <Label text="Tema:"/>
-        <ComboBox fx:id="comboTema" promptText="Seleccione tema" prefWidth="150"/>
-    </HBox>
-
-    <HBox spacing="10" alignment="CENTER_LEFT">
-        <Label text="Porcentaje:"/>
-        <TextField fx:id="porcentajeField" promptText="Ingrese porcentaje" prefWidth="100"/>
-        <Label text="Tiempo (segundos):"/>
-        <TextField fx:id="tiempoField" promptText="Tiempo" prefWidth="100"/>
-    </HBox>
-
-    <HBox spacing="20" alignment="CENTER">
-        <Button text="Guardar Pregunta" onAction="#guardarPregunta"/>
-        <Button text="Volver" onAction="#volver"/>
-    </HBox>
-
-</VBox>
+</AnchorPane>

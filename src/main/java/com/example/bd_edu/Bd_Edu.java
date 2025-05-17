@@ -51,7 +51,7 @@ public class Bd_Edu {
         try {
             String url = "jdbc:oracle:thin:@//localhost:1521/xe";
             String user = "SYSTEM";
-            String password = "0000";
+            String password = "Arango2004";
 
             Class.forName("oracle.jdbc.driver.OracleDriver");
             connection = DriverManager.getConnection(url, user, password);

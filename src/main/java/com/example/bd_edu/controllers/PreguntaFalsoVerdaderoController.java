@@ -11,7 +11,7 @@ import java.util.List;
 public class PreguntaFalsoVerdaderoController {
 
     // Referencias a los elementos de la interfaz
-    @FXML private TextField enunciadoField;
+    @FXML private TextArea enunciadoField;
 
     @FXML private RadioButton verdaderoRadio;
 

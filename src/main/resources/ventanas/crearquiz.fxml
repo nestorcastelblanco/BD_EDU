@@ -1,56 +1,111 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="390.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bd_edu.controllers.CrearExamenController">
-   <children>
-      <Label layoutX="13.0" layoutY="9.0" prefWidth="358.0" text="Crear Nuevo Examen" textAlignment="CENTER" />
-      <Separator layoutX="-11.0" layoutY="38.0" prefWidth="382.0" />
-      <Separator layoutX="371.0" layoutY="-8.0" orientation="VERTICAL" prefHeight="398.0" />
-      <Label layoutX="383.0" layoutY="9.0" prefWidth="199.0" text="Preguntas" textAlignment="CENTER" />
+<AnchorPane prefHeight="470.0" prefWidth="1000.0" styleClass="anchor-pane" stylesheets="@../estilos.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bd_edu.controllers.CrearExamenController">
 
-      <Label layoutX="23.0" layoutY="58.0" text="Nombre Examen" />
-      <TextField fx:id="nombreExamenField" layoutX="23.0" layoutY="75.0" prefWidth="162.0" />
+   <!-- Panel principal centrado -->
+   <HBox alignment="TOP_CENTER" spacing="30" AnchorPane.leftAnchor="15" AnchorPane.rightAnchor="15" AnchorPane.topAnchor="15">
+      <!-- Panel izquierdo - Formulario de examen -->
+      <VBox prefWidth="450" spacing="12">
+         <!-- Título -->
+         <Label styleClass="label-titulo" text="Crear Nuevo Examen">
+            <font>
+               <Font name="Segoe UI" size="20.0" />
+            </font>
+            <padding>
+               <Insets bottom="8" />
+            </padding>
+         </Label>
 
-      <Label layoutX="23.0" layoutY="106.0" text="Descripcion" />
-      <TextArea fx:id="descripcionArea" layoutX="23.0" layoutY="129.0" prefHeight="122.0" prefWidth="162.0" />
+         <!-- Campos del formulario -->
+         <GridPane hgap="10" prefHeight="312.0" prefWidth="441.0" vgap="8">
+            <columnConstraints>
+               <ColumnConstraints halignment="RIGHT" prefWidth="120" />
+               <ColumnConstraints halignment="LEFT" prefWidth="310" />
+            </columnConstraints>
+            <rowConstraints>
+               <RowConstraints prefHeight="38" />
+               <RowConstraints prefHeight="65" /> <!-- TextArea -->
+               <RowConstraints prefHeight="38" />
+               <RowConstraints prefHeight="38" />
+               <RowConstraints prefHeight="38" />
+               <RowConstraints prefHeight="38" />
+            </rowConstraints>
 
-      <Label layoutX="208.0" layoutY="58.0" text="Tipo de Examen" />
-      <ChoiceBox fx:id="tipoExamenChoice" layoutX="208.0" layoutY="75.0" prefWidth="150.0" />
+            <!-- Nombre del examen -->
+            <Label styleClass="text-label" text="Nombre Examen:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <TextField fx:id="nombreExamenField" prefHeight="30" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
-      <Label layoutX="208.0" layoutY="106.0" text="Tema" />
-      <ChoiceBox fx:id="temaChoice" layoutX="208.0" layoutY="123.0" prefWidth="150.0" />
+            <!-- Descripción -->
+            <Label styleClass="text-label" text="Descripción:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <TextArea fx:id="descripcionArea" prefHeight="60" prefRowCount="2" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-      <Label layoutX="208.0" layoutY="158.0" text="Cantidad de Preguntas" />
-      <TextField fx:id="cantidadPreguntasField" layoutX="208.0" layoutY="175.0" prefWidth="150.0" />
+            <!-- Tipo de examen -->
+            <Label styleClass="text-label" text="Tipo de Examen:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+            <ChoiceBox fx:id="tipoExamenChoice" prefHeight="40.0" prefWidth="303.0" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
-      <Label layoutX="208.0" layoutY="208.0" text="Preguntas Estudiantes" />
-      <TextField fx:id="preguntasEstudiantesField" layoutX="208.0" layoutY="225.0" prefWidth="150.0" />
+            <!-- Tema -->
+            <Label styleClass="text-label" text="Tema:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+            <ChoiceBox fx:id="temaChoice" prefHeight="40.0" prefWidth="304.0" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
-      <Button fx:id="modelarExamenButton" layoutX="23.0" layoutY="270.0" onAction="#modelarExamen" text="Agregar Preguntas" />
-      <Button fx:id="crearExamenButton" layoutX="148.0" layoutY="270.0" onAction="#crearExamen" text="Crear Examen" />
-      <Button layoutX="249.0" layoutY="270.0" onAction="#generarPreguntasAutomaticamente" prefHeight="25.0" prefWidth="110.0" text="Generar Examen" />
+            <!-- Cantidad de preguntas -->
+            <Label styleClass="text-label" text="Cantidad:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+            <TextField fx:id="cantidadPreguntasField" prefHeight="30" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="4" />
 
-      <Label layoutX="17.0" layoutY="313.0" prefWidth="358.0" text="Modificar Preguntas" textAlignment="CENTER" />
-      <Separator layoutX="-29.0" layoutY="306.0" prefWidth="402.0" />
+            <!-- Preguntas por estudiante -->
+            <Label prefWidth="139.0" styleClass="text-label" text="Preguntas/Estudiante:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+            <TextField fx:id="preguntasEstudiantesField" prefHeight="30" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+         </GridPane>
 
-      <ChoiceBox fx:id="agregarPreguntaChoice" layoutX="23.0" layoutY="347.0" prefWidth="150.0" />
-      <Button fx:id="agregarPreguntaButton" layoutX="248.0" layoutY="345.0" onAction="#agregarPregunta" text="Agregar Pregunta" />
-      <Button fx:id="eliminarPreguntaButton" layoutX="429.0" layoutY="346.0" onAction="#eliminarPregunta" text="Eliminar Pregunta" />
+         <!-- Botones principales -->
+         <HBox alignment="CENTER" spacing="10" styleClass="button-container">
+            <Button fx:id="modelarExamenButton" onAction="#modelarExamen" prefHeight="35" prefWidth="200" styleClass="button" text="Agregar Preguntas" />
+            <Button fx:id="crearExamenButton" onAction="#crearExamen" prefHeight="35" prefWidth="200" styleClass="button" text="Crear Examen" />
+         </HBox>
 
-      <TableView fx:id="tablaPreguntas" layoutX="386.0" layoutY="36.0" prefHeight="294.0" prefWidth="200.0">
-         <columns>
-            <TableColumn fx:id="columnaEnunciado" prefWidth="100" text="Pregunta" />
-            <TableColumn fx:id="columnaTipo" prefWidth="100" text="Tipo" />
-         </columns>
-      </TableView>
-   </children>
+         <Button onAction="#generarPreguntasAutomaticamente" prefHeight="35" prefWidth="430" styleClass="button" text="Generar Preguntas Automáticamente" />
+      </VBox>
+
+      <!-- Panel derecho - Tabla de preguntas y modificación -->
+      <VBox prefWidth="500" spacing="12">
+         <!-- Título -->
+         <Label styleClass="label-titulo" text="Preguntas del Examen">
+            <font>
+               <Font name="Segoe UI" size="20.0" />
+            </font>
+            <padding>
+               <Insets bottom="8" />
+            </padding>
+         </Label>
+
+         <TableView fx:id="tablaPreguntas" prefHeight="260" prefWidth="500">
+            <columns>
+               <TableColumn fx:id="columnaEnunciado" prefWidth="350" styleClass="table-column" text="Pregunta" />
+               <TableColumn fx:id="columnaTipo" prefWidth="140" styleClass="table-column" text="Tipo" />
+            </columns>
+         </TableView>
+
+         <!-- Título Modificar Preguntas -->
+         <Label styleClass="label-subtitulo" text="Modificar Preguntas">
+            <font>
+               <Font size="16" />
+            </font>
+            <padding>
+               <Insets bottom="5" top="5" />
+            </padding>
+         </Label>
+
+         <!-- Controles de modificación -->
+         <HBox alignment="CENTER" spacing="10" styleClass="button-container">
+            <ChoiceBox fx:id="agregarPreguntaChoice" prefHeight="35" prefWidth="350" styleClass="text-field" />
+            <Button fx:id="agregarPreguntaButton" onAction="#agregarPregunta" prefHeight="35" prefWidth="130" styleClass="button" text="Agregar" />
+         </HBox>
+
+         <Button fx:id="eliminarPreguntaButton" onAction="#eliminarPregunta" prefHeight="35" prefWidth="500" styleClass="boton-regresar" text="Eliminar Seleccionada" />
+      </VBox>
+   </HBox>
 </AnchorPane>

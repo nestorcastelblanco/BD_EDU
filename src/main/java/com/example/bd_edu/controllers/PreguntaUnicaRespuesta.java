@@ -25,12 +25,18 @@ public class PreguntaUnicaRespuesta {
     @FXML private Button guardarButton, volverButton;
     @FXML private ToggleGroup opcionesGroup;
 
+
     Bd_Edu bd_edu = Bd_Edu.getInstance();
 
     @FXML
     public void initialize() {
         // Cargar estados
         comboEstado.setItems(FXCollections.observableArrayList("Activo", "Inactivo"));
+
+        radio1.setToggleGroup(opcionesGroup);
+        radio2.setToggleGroup(opcionesGroup);
+        radio3.setToggleGroup(opcionesGroup);
+        radio4.setToggleGroup(opcionesGroup);
 
         // Cargar temas desde BD
         List<String> temas = bd_edu.obtenerTemasDesdeBD();

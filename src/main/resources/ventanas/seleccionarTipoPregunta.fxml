@@ -1,19 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<VBox spacing="10" alignment="CENTER" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.bd_edu.controllers.SeleccionarTipoPreguntaController">
-    <Label text="Selecciona el tipo de pregunta" style="-fx-font-size: 16px;"/>
-    <Button fx:id="btnUnica" text="Única respuesta"/>
-    <Button fx:id="btnMultiple" text="Selección múltiple"/>
-    <Button fx:id="btnVF" text="Verdadero / Falso"/>
-    <Button fx:id="btnEmparejar" text="Emparejar"/>
-    <Button fx:id="btnOrdenar" text="Ordenar"/>
-    <Button fx:id="btnCompletar" text="Completar"/>
-    <Button fx:id="btnVolver" text="Volver"/>
+<VBox alignment="CENTER" prefHeight="500.0" prefWidth="350.0" spacing="15" stylesheets="@../estilos.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bd_edu.controllers.SeleccionarTipoPreguntaController">
+
+    <!-- Title -->
+    <Label styleClass="label-titulo" text="Tipo de Pregunta">
+        <font>
+            <Font name="Segoe UI" size="14.0" />
+        </font>
+        <padding>
+            <Insets bottom="15" />
+        </padding>
+    </Label>
+
+    <!-- Question type buttons -->
+    <VBox alignment="CENTER" prefWidth="300" spacing="10">
+        <Button fx:id="btnUnica" styleClass="button-tipo-pregunta" text="Única respuesta" />
+        <Button fx:id="btnMultiple" styleClass="button-tipo-pregunta" text="Selección múltiple" />
+        <Button fx:id="btnVF" styleClass="button-tipo-pregunta" text="Verdadero / Falso" />
+        <Button fx:id="btnEmparejar" styleClass="button-tipo-pregunta" text="Emparejar" />
+        <Button fx:id="btnOrdenar" styleClass="button-tipo-pregunta" text="Ordenar" />
+        <Button fx:id="btnCompletar" styleClass="button-tipo-pregunta" text="Completar" />
+    </VBox>
+
+    <!-- Bottom buttons -->
+    <Button fx:id="btnVolver" prefHeight="35" prefWidth="120" styleClass="boton-regresar" text="Volver">
+        <VBox.margin>
+            <Insets top="20" />
+        </VBox.margin>
+    </Button>
 </VBox>
-

@@ -2,24 +2,44 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml"
+<AnchorPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.example.bd_edu.controllers.HorarioController"
-            prefHeight="400.0" prefWidth="600.0"
+            prefHeight="500.0" prefWidth="800.0"
+            styleClass="anchor-pane"
             stylesheets="@../estilos.css">
 
-    <VBox spacing="15" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" AnchorPane.bottomAnchor="10">
-        <Label text="Horario de Clases" styleClass="label-titulo"/>
+    <!-- Main content container -->
+    <VBox spacing="15" alignment="TOP_CENTER"
+          AnchorPane.topAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.bottomAnchor="20">
 
-        <TableView fx:id="tablaHorario" prefHeight="350" styleClass="table-view">
+        <!-- Title -->
+        <Label text="Horario de Clases" styleClass="label-titulo">
+            <font>
+                <Font name="Segoe UI" size="22"/>
+            </font>
+            <padding>
+                <Insets bottom="10"/>
+            </padding>
+        </Label>
+
+        <!-- Schedule Table -->
+        <TableView fx:id="tablaHorario" prefHeight="400" prefWidth="760">
             <columns>
-                <TableColumn fx:id="colDia" text="Día"/>
-                <TableColumn fx:id="colHora" text="Hora"/>
-                <TableColumn fx:id="colMateria" text="Materia"/>
-                <TableColumn fx:id="colAula" text="Aula"/>
+                <TableColumn fx:id="colDia" text="Día" prefWidth="150" styleClass="table-column"/>
+                <TableColumn fx:id="colHora" text="Hora" prefWidth="150" styleClass="table-column"/>
+                <TableColumn fx:id="colMateria" text="Materia" prefWidth="310" styleClass="table-column"/>
+                <TableColumn fx:id="colAula" text="Aula" prefWidth="150" styleClass="table-column"/>
             </columns>
         </TableView>
 
-        <Button fx:id="volverButton" text="Regresar" onAction="#volver" styleClass="boton-regresar"/>
+        <!-- Bottom controls -->
+        <HBox alignment="CENTER_RIGHT">
+            <Button fx:id="volverButton" text="Regresar" onAction="#volver"
+                    styleClass="boton-regresar" prefWidth="120" prefHeight="35"/>
+        </HBox>
     </VBox>
 </AnchorPane>

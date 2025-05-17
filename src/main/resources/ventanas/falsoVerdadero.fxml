@@ -2,56 +2,76 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
 
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.bd_edu.controllers.PreguntaFalsoVerdaderoController"
-      spacing="10" alignment="CENTER">
+<AnchorPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.bd_edu.controllers.PreguntaFalsoVerdaderoController"
+            prefHeight="450.0" prefWidth="700.0"
+            styleClass="anchor-pane"
+            stylesheets="@../estilos.css">
 
-    <padding>
-        <Insets top="20" right="20" bottom="20" left="20"/>
-    </padding>
+    <!-- Panel principal -->
+    <VBox spacing="15" alignment="TOP_CENTER"
+          AnchorPane.topAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20">
 
-    <Label text="Crear Pregunta Verdadero / Falso" style="-fx-font-size: 16px;"/>
+        <!-- Título principal -->
+        <Label text="Crear Pregunta Verdadero/Falso" styleClass="label-titulo">
+            <font>
+                <Font name="Segoe UI" size="20.0" />
+            </font>
+        </Label>
 
-    <HBox spacing="10" alignment="CENTER_LEFT">
-        <Label text="Enunciado:"/>
-        <TextField fx:id="enunciadoField" promptText="Ingrese el enunciado" styleClass="text-field" HBox.hgrow="ALWAYS"/>
-    </HBox>
+        <!-- Campos del formulario -->
+        <GridPane hgap="10" vgap="10" prefWidth="650">
+            <columnConstraints>
+                <ColumnConstraints prefWidth="120" halignment="RIGHT"/>
+                <ColumnConstraints prefWidth="530" halignment="LEFT"/>
+            </columnConstraints>
 
-    <!-- Definimos el ToggleGroup -->
-    <fx:define>
-        <ToggleGroup fx:id="verdaderoFalsoGroup"/>
-    </fx:define>
+            <!-- Enunciado -->
+            <Label text="Enunciado:" styleClass="text-label" GridPane.rowIndex="0"/>
+            <TextArea fx:id="enunciadoField" styleClass="text-field" prefRowCount="3"
+                      GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
-    <HBox spacing="10" alignment="CENTER_LEFT">
-        <RadioButton fx:id="verdaderoRadio" text="Verdadero" toggleGroup="$verdaderoFalsoGroup"/>
-        <RadioButton fx:id="falsoRadio" text="Falso" toggleGroup="$verdaderoFalsoGroup"/>
-    </HBox>
-    <HBox spacing="10" alignment="CENTER_LEFT">
-        <children>
-            <Label text="Estado:"/>
-            <ComboBox fx:id="comboEstado" promptText="Seleccione estado" prefWidth="150"/>
-            <Label text="Tema:"/>
-            <ComboBox fx:id="comboTema" promptText="Seleccione tema" prefWidth="150"/>
-        </children>
-    </HBox>
+            <!-- Opciones Verdadero/Falso -->
+            <Label text="Respuesta:" styleClass="text-label" GridPane.rowIndex="1"/>
+            <HBox spacing="20" GridPane.rowIndex="1" GridPane.columnIndex="1">
+                <fx:define>
+                    <ToggleGroup fx:id="verdaderoFalsoGroup"/>
+                </fx:define>
+                <RadioButton fx:id="verdaderoRadio" text="Verdadero"
+                             toggleGroup="$verdaderoFalsoGroup" styleClass="radio-button-white"/>
+                <RadioButton fx:id="falsoRadio" text="Falso"
+                             toggleGroup="$verdaderoFalsoGroup" styleClass="radio-button-white"/>
+            </HBox>
 
-    <HBox spacing="10" alignment="CENTER_LEFT">
-        <children>
-            <Label text="Porcentaje:"/>
-            <TextField fx:id="porcentajeField" promptText="Ingrese porcentaje" prefWidth="100"/>
-            <Label text="Tiempo (segundos):"/>
-            <TextField fx:id="tiempoField" promptText="Tiempo" prefWidth="100"/>
-        </children>
-    </HBox>
+            <!-- Estado y Tema -->
+            <Label text="Estado:" styleClass="text-label" GridPane.rowIndex="2"/>
+            <ComboBox fx:id="comboEstado" styleClass="combo-box"
+                      GridPane.rowIndex="2" GridPane.columnIndex="1" prefWidth="200"/>
 
-    <HBox spacing="20" alignment="CENTER">
-        <children>
-            <Button fx:id="guardarButton" text="Guardar Pregunta" onAction="#guardarPregunta"/>
-            <Button fx:id="volverButton" text="Volver" onAction="#volver"/>
-        </children>
-    </HBox>
+            <Label text="Tema:" styleClass="text-label" GridPane.rowIndex="3"/>
+            <ComboBox fx:id="comboTema" styleClass="combo-box"
+                      GridPane.rowIndex="3" GridPane.columnIndex="1" prefWidth="200"/>
 
-</VBox>
+            <!-- Porcentaje y Tiempo -->
+            <Label text="Porcentaje:" styleClass="text-label" GridPane.rowIndex="4"/>
+            <TextField fx:id="porcentajeField" styleClass="text-field"
+                       GridPane.rowIndex="4" GridPane.columnIndex="1" prefWidth="100"/>
+
+            <Label text="Tiempo (segundos):" styleClass="text-label" GridPane.rowIndex="5"/>
+            <TextField fx:id="tiempoField" styleClass="text-field"
+                       GridPane.rowIndex="5" GridPane.columnIndex="1" prefWidth="100"/>
+        </GridPane>
+
+        <!-- Botones -->
+        <HBox spacing="20" alignment="CENTER">
+            <Button fx:id="guardarButton" text="Guardar Pregunta"
+                    onAction="#guardarPregunta" styleClass="button" prefWidth="180" prefHeight="35"/>
+            <Button fx:id="volverButton" text="Volver"
+                    onAction="#volver" styleClass="boton-regresar" prefWidth="180" prefHeight="35"/>
+        </HBox>
+    </VBox>
+</AnchorPane>
