@@ -8,7 +8,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import lombok.Getter;
 import oracle.jdbc.OracleTypes;
@@ -51,7 +50,7 @@ public class Bd_Edu {
         try {
             String url = "jdbc:oracle:thin:@//localhost:1521/xe";
             String user = "SYSTEM";
-            String password = "Arango2004";
+            String password = "0000";
 
             Class.forName("oracle.jdbc.driver.OracleDriver");
             connection = DriverManager.getConnection(url, user, password);
@@ -637,9 +636,14 @@ public class Bd_Edu {
 
     public List<Curso> obtenerCursos() {
         List<Curso> cursos = new ArrayList<>();
+        String url = "jdbc:oracle:thin:@//localhost:1521/xe";
+        String user = "SYSTEM";
+        String password = "0000";
         String sql = "{ call obtener_cursos(?) }";
 
-        try (CallableStatement cs = connection.prepareCall(sql)) {
+        try (Connection conn = DriverManager.getConnection(url, user, password);
+             CallableStatement cs = conn.prepareCall(sql)) {
+
             cs.registerOutParameter(1, OracleTypes.CURSOR);
             cs.execute();
 
@@ -653,8 +657,42 @@ public class Bd_Edu {
                 }
             }
         } catch (SQLException e) {
-            LOGGER.log(Level.SEVERE, "Error al obtener exámenes del docente", e);
+            LOGGER.log(Level.SEVERE, "Error al obtener cursos", e);
         }
         return cursos;
+    }
+
+    public List<Examen> obtenerExamenesEstudiante() {
+        List<Examen> examenList = new ArrayList<>();
+        String sql = "{ call obtener_examenes_estudiante(?,?) }";
+
+        try (CallableStatement cs = connection.prepareCall(sql)) {
+            cs.setInt(1, idUsuario); // Asume que tienes idUsuario disponible
+            cs.registerOutParameter(2, OracleTypes.CURSOR);
+            cs.execute();
+
+            try (ResultSet rs = (ResultSet) cs.getObject(2)) {
+                while (rs.next()) {
+                    Examen examen = new Examen();
+                    examen.setIdExamen(rs.getInt("ID_EXAMEN"));
+                    examen.setTitulo(rs.getString("TITULO"));
+                    examen.setDescripcion(rs.getString("DESCRIPCION"));
+                    examen.setCategoria(rs.getString("CATEGORIA"));
+                    examen.setFechaInicio(rs.getTimestamp("FECHA_INICIO").toLocalDateTime());
+                    examen.setFechaFin(rs.getTimestamp("FECHA_FIN").toLocalDateTime());
+                    examen.setTiempoTotal(rs.getInt("TIEMPO_TOTAL"));
+                    examen.setIdDocente(rs.getInt("ID_DOCENTE"));
+                    examen.setIdCurso(rs.getInt("ID_CURSO"));
+                    examen.setUmbralAprobacion(rs.getBigDecimal("UMBRAL_APROBACION"));
+                    examen.setPreguntasEstudiante(rs.getInt("PREGUNTAS_ESTUDIANTE"));
+                    examen.setIdTema(rs.getInt("ID_TEMA"));
+                    examenList.add(examen);
+                }
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "Error al obtener exámenes del estudiante", e);
+        }
+
+        return examenList;
     }
 }

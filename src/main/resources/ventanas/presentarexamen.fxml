@@ -19,22 +19,18 @@
             </padding>
         </Label>
 
-        <!-- Temporizador (mantenido alineado a la izquierda) -->
-        <Label fx:id="tiempoLabel" alignment="CENTER_LEFT" styleClass="label-temporizador" HBox.hgrow="ALWAYS">
-            <font>
-                <Font name="Segoe UI Bold" size="18" />
-            </font>
-        </Label>
+        <!-- Tabla de Exámenes -->
+        <TableView fx:id="tablaExamenes" prefHeight="200" prefWidth="760">
+            <columns>
+                <TableColumn fx:id="colTitulo" prefWidth="150.0" text="Título" />
+                <TableColumn fx:id="colDescripcion" prefWidth="200.0" text="Descripción" />
+                <TableColumn fx:id="colFechaInicio" prefWidth="110.0" text="Inicio" />
+                <TableColumn fx:id="colFechaFin" prefWidth="110.0" text="Final" />
+                <TableColumn fx:id="colTiempo" prefWidth="80.0" text="Minutos" />
+                <TableColumn fx:id="colCategoria" prefWidth="110.0" text="Categoría" />
+            </columns>
+        </TableView>
 
-        <!-- Preguntas (contenido alineado a la izquierda) -->
-        <VBox fx:id="preguntasVBox" spacing="15" styleClass="preguntas-contenedor">
-            <!-- Ejemplo de preguntas -->
-            <Label styleClass="label-pregunta" text="Pregunta 1: ¿Cuál es la capital de Colombia?" textFill="WHITE" />
-            <TextField prefWidth="760" promptText="Tu respuesta..." styleClass="campo-respuesta" />
-
-            <Label styleClass="label-pregunta" text="Pregunta 2: ¿Quién escribió 'Cien años de soledad'?" textFill="WHITE" />
-            <TextField prefWidth="760" promptText="Tu respuesta..." styleClass="campo-respuesta" />
-        </VBox>
 
         <!-- Botones centrados -->
         <HBox alignment="CENTER" spacing="20">
