@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.effect.DropShadow?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.bd_edu.controllers.LoginController"
-            prefHeight="600.0" prefWidth="800.0" fx:id="anchorPane" styleClass="anchor-pane"
-            stylesheets="@/estilos.css">  <!-- Asegúrate de que la ruta al archivo CSS sea correcta -->
-    <VBox alignment="CENTER" spacing="20" AnchorPane.topAnchor="100.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0">
-        <VBox spacing="20" alignment="CENTER" styleClass="login-box">
-            <Label text="¡Bienvenido!" styleClass="label-titulo"/>
-            <TextField fx:id="usernameField" promptText="Usuario" styleClass="text-field" onMouseClicked="#onFocus"/>
-            <PasswordField fx:id="passwordField" promptText="Contraseña" styleClass="text-field" onMouseClicked="#onFocus"/>
-            <Button text="Iniciar Sesión" onAction="#handleLogin" maxWidth="Infinity" styleClass="button"/>
-            <Label fx:id="errorLabel" textFill="red" style="-fx-font-size: 14px;"/>
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.bd_edu.controladores.LoginController" stylesheets="@../estilos.css">
+    <children>
+        <VBox alignment="CENTER" spacing="15.0" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" styleClass="contenedor-login">
+            <padding>
+                <Insets top="60" bottom="60" left="60" right="60"/>
+            </padding>
+
+            <Label text="Inicio de Sesión" styleClass="titulo-login"/>
+
+            <TextField fx:id="campoCorreo" promptText="Correo electrónico" styleClass="campo-texto"/>
+            <PasswordField fx:id="campoContrasena" promptText="Contraseña" styleClass="campo-texto"/>
+
+            <HBox alignment="CENTER" spacing="20" styleClass="h-box">
+                <RadioButton fx:id="radioEstudiante" text="Estudiante"/>
+                <RadioButton fx:id="radioProfesor" text="Profesor"/>
+            </HBox>
+
+            <Button text="Iniciar sesión" onAction="#manejarInicioSesion" styleClass="boton-login"/>
         </VBox>
-    </VBox>
+
+    </children>
 </AnchorPane>

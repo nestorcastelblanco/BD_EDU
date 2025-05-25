@@ -1,345 +1,96 @@
-/* ============ ESTILOS GENERALES ============ */
+/* General para ventanas grandes */
 .root {
-    -fx-font-family: 'Segoe UI', Tahoma, sans-serif;
-    -fx-background-color: #0f2027;
+    -fx-font-family: 'Segoe UI', Arial, sans-serif;
+    -fx-font-size: 12px; /* antes 15px */
+    -fx-background-color: linear-gradient(to bottom right, #f5f7fa, #c3cfe2);
 }
 
-/* ============ ESTRUCTURA PRINCIPAL ============ */
-.anchor-pane {
-    -fx-background-color: #0f2027;
-    -fx-padding: 20px;
-}
-
-/* ============ TIPOGRAFÍA Y TÍTULOS ============ */
-.label-titulo {
-    -fx-font-size: 28px;
-    -fx-font-weight: bold;
-    -fx-text-fill: white;
-    -fx-alignment: center;
-    -fx-padding: 0 0 15px 0;
-    -fx-font-family: 'Segoe UI', Tahoma, sans-serif;
-}
-
-.label-subtitulo {
-    -fx-font-size: 18px;
-    -fx-font-weight: bold;
-    -fx-text-fill: white;
-    -fx-padding: 20px 0 10px 0;
-}
-
-.text-label {
-    -fx-font-size: 14px;
-    -fx-font-weight: bold;
-    -fx-text-fill: white;
-}
-
-.error-label {
-    -fx-font-size: 14px;
-    -fx-text-fill: #ff4444;
-    -fx-font-weight: normal;
-}
-
-/* ============ CONTENEDORES ============ */
-.login-box {
-    -fx-background-color: linear-gradient(to bottom right, #0f2027, #203a43, #2c5364);
-    -fx-background-radius: 15;
-    -fx-padding: 25px;
-    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 10, 0, 0, 5);
-}
-
-/* ============ CONTROLES DE FORMULARIO ============ */
-.text-field, .password-field {
+/* Ventana de login más amplia */
+.contenedor-login {
     -fx-background-color: white;
-    -fx-border-color: #cccccc;
-    -fx-border-width: 1px;
-    -fx-padding: 10px;
-    -fx-font-size: 16px;
-    -fx-background-radius: 8px;
-    -fx-border-radius: 8px;
-    -fx-min-height: 40px;
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.15), 15, 0, 0, 0);
+    -fx-padding: 40px;
+    -fx-max-width: 500px;
 }
 
-.text-area {
-    -fx-background-color: white;
-    -fx-border-color: #cccccc;
-    -fx-border-width: 1px;
-    -fx-padding: 10px;
-    -fx-font-size: 16px;
-    -fx-background-radius: 8px;
-    -fx-border-radius: 8px;
-}
-
-.text-area .content {
-    -fx-background-color: white;
-    -fx-background-radius: 8px;
-}
-
-.combo-box, .choice-box {
-    -fx-background-color: white;
-    -fx-border-color: #cccccc;
-    -fx-border-width: 1px;
-    -fx-padding: 8px;
-    -fx-font-size: 16px;
-    -fx-background-radius: 8px;
-    -fx-border-radius: 8px;
-    -fx-min-height: 40px;
-}
-
-.combo-box .list-cell, .choice-box .list-cell {
-    -fx-text-fill: #333333;
-    -fx-font-size: 14px;
-    -fx-padding: 8px;
-}
-
-/* ============ BOTONES ============ */
-.button {
-    -fx-background-color: #2575fc;
-    -fx-text-fill: white;
-    -fx-font-size: 16px;
+/* Título login */
+.titulo-login {
+    -fx-font-size: 20px; /* antes 28px */
     -fx-font-weight: bold;
-    -fx-padding: 12px 25px;
-    -fx-background-radius: 8px;
-    -fx-cursor: hand;
-    -fx-min-width: 120px;
-    -fx-min-height: 40px;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 2);
+    -fx-text-fill: #2c3e50;
+    -fx-padding: 0 0 20px 0;
 }
 
-.button:hover {
-    -fx-background-color: #4a90e2;
-    -fx-scale-x: 1.03;
-    -fx-scale-y: 1.03;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 8, 0, 0, 3);
-}
-
-.boton-regresar {
-    -fx-background-color: #f44336;
-    -fx-text-fill: white;
-    -fx-font-size: 16px;
-    -fx-font-weight: bold;
-    -fx-padding: 12px 25px;
-    -fx-background-radius: 8px;
-    -fx-cursor: hand;
-    -fx-min-width: 120px;
-    -fx-min-height: 40px;
-}
-
-.boton-regresar:hover {
-    -fx-background-color: #e53935;
-    -fx-scale-x: 1.03;
-    -fx-scale-y: 1.03;
-}
-
-/* ============ TABLAS ============ */
-.table-view {
-    -fx-background-color: white;
-    -fx-border-color: #cccccc;
-    -fx-border-radius: 10px;
+/* Campos texto login */
+.campo-texto {
+    -fx-background-color: #f8f9fa;
     -fx-background-radius: 10px;
-    -fx-font-size: 14px;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 2);
-}
-
-.table-view .column-header {
-    -fx-background-color: #2575fc;
-    -fx-text-fill: white;
-    -fx-font-weight: bold;
-    -fx-font-size: 14px;
-    -fx-alignment: CENTER_LEFT;
+    -fx-border-radius: 10px;
+    -fx-border-color: #dcdde1;
+    -fx-border-width: 1px;
     -fx-padding: 10px;
+    -fx-font-size: 12px; /* antes 16px */
+    -fx-pref-height: 40px;
+    -fx-max-width: 300px;
 }
 
-.table-row-cell {
-    -fx-cell-size: 45px;
-    -fx-padding: 8px;
-}
-
-.table-row-cell:odd {
-    -fx-background-color: #f9f9f9;
-}
-
-.table-row-cell:selected {
-    -fx-background-color: #4a90e2;
-    -fx-text-fill: white;
-}
-
-.table-column {
-    -fx-alignment: CENTER_LEFT;
-    -fx-font-size: 14px;
-    -fx-text-fill: #333333;
-}
-
-/* ============ ELEMENTOS DECORATIVOS ============ */
-.separator {
-    -fx-padding: 10px 0;
-    -fx-border-color: #2c5364;
-    -fx-border-width: 1px;
-}
-
-/* ============ TRANSICIONES Y EFECTOS ============ */
-.transition-all {
-    -fx-transition: all 0.3s ease;
-}
-
-/* ============ RADIO BUTTONS BLANCOS ============ */
-.radio-button-white {
-    -fx-text-fill: white;
-    -fx-font-size: 14px;
-    -fx-font-weight: bold;
-}
-
-.radio-button-white .radio {
-    -fx-background-color: white;
-    -fx-background-insets: 0;
-    -fx-background-radius: 50%;
-    -fx-border-color: #cccccc;
-    -fx-border-width: 1px;
-    -fx-border-radius: 50%;
-    -fx-padding: 3px;
-}
-
-.radio-button-white:selected .dot {
-    -fx-background-color: #2575fc;
-    -fx-background-insets: 0;
-    -fx-background-radius: 50%;
-}
-
-.radio-button-white:hover {
-    -fx-text-fill: #e0e0e0;
-}
-
-.radio-button-white:hover .radio {
-    -fx-background-color: #f0f0f0;
-}
-
-/* ===== ESTILOS PARA PRESENTAR EXAMEN ===== */
-.label-titulo-examen {
-    -fx-text-fill: #ffffff;
-    -fx-font-weight: bold;
-}
-
-.label-temporizador {
-    -fx-text-fill: #ff6b6b;
-    -fx-font-weight: bold;
-    -fx-padding: 3 12;
-    -fx-border-color: #ff6b6b;
-    -fx-border-radius: 15;
-    -fx-border-width: 1;
-}
-
-.label-pregunta {
-    -fx-text-fill: #ffffff;
-    -fx-font-size: 16px;
-    -fx-font-weight: bold;
-    -fx-wrap-text: true;
-}
-
-.campo-respuesta-oscuro {
-    -fx-background-color: #2d3436;
-    -fx-text-fill: #ffffff;
-    -fx-font-size: 14px;
-    -fx-padding: 8;
-    -fx-background-radius: 5;
-    -fx-border-color: #636e72;
-    -fx-border-radius: 5;
-    -fx-border-width: 1;
-}
-
-.campo-respuesta-oscuro:focused {
-    -fx-border-color: #74b9ff;
-}
-
-.scroll-transparent,
-.scroll-transparent .viewport,
-.scroll-transparent .content {
-    -fx-background-color: transparent;
-}
-
-.preguntas-container {
-    -fx-padding: 0 10 10 10;
-}
-
-.button-examen {
-    -fx-background-color: #00b894;
-    -fx-text-fill: white;
-    -fx-font-weight: bold;
-    -fx-font-size: 14px;
-    -fx-padding: 10 20;
-    -fx-background-radius: 5;
-}
-
-.button-examen:hover {
-    -fx-background-color: #00997b;
-}
-
-.button-cancelar {
-    -fx-background-color: #d63031;
-    -fx-text-fill: white;
-    -fx-font-weight: bold;
-    -fx-font-size: 14px;
-    -fx-padding: 10 20;
-    -fx-background-radius: 5;
-}
-
-.button-cancelar:hover {
-    -fx-background-color: #b52b2b;
-}
-
-/* ============ QUESTION TYPE SELECTION STYLES ============ */
-.button-tipo-pregunta {
+/* Botón login moderno */
+.boton-login {
     -fx-background-color: #3498db;
     -fx-text-fill: white;
-    -fx-font-size: 14px;
+    -fx-font-size: 12px; /* antes 16px */
     -fx-font-weight: bold;
-    -fx-padding: 12 25;
-    -fx-background-radius: 5;
-    -fx-min-width: 250;
-    -fx-min-height: 40;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 2);
-}
-
-.button-tipo-pregunta:hover {
-    -fx-background-color: #2980b9;
+    -fx-background-radius: 10px;
+    -fx-padding: 10px 24px;
     -fx-cursor: hand;
 }
 
-.label-titulo {
-    -fx-text-fill: white;
-    -fx-font-weight: bold;
+.boton-login:hover {
+    -fx-background-color: #2980b9;
 }
 
-/* ============ QUESTION BANK STYLES ============ */
-.header-box {
-    -fx-padding: 0 0 15px 0;
-    -fx-border-color: #2c5364;
-    -fx-border-width: 0 0 1px 0;
-}
-
-.search-field {
-    -fx-font-size: 14px;
-    -fx-padding: 8px;
-    -fx-background-radius: 5;
-    -fx-border-radius: 5;
-    -fx-prompt-text-fill: #95a5a6;
-    -fx-min-width: 250px;
+/* Estilo general para todas las tablas */
+.table-view {
+    -fx-font-size: 10px; /* antes 13px */
+    -fx-table-cell-border-color: #dcdcdc;
+    -fx-padding: 4px;
+    -fx-fixed-cell-size: 26px;
 }
 
 .table-view .column-header-background {
-    -fx-background-color: #2575fc;
+    -fx-background-color: #ecf0f1;
 }
 
-.table-view .column-header {
-    -fx-text-fill: white;
+.table-view .table-row-cell {
+    -fx-background-color: white;
+    -fx-border-color: transparent transparent #ecf0f1 transparent;
+}
+
+.table-view .table-cell {
+    -fx-padding: 4px 8px;
+    -fx-text-fill: #2c3e50;
+}
+
+/* Colores al seleccionar filas */
+.table-row-cell:filled:selected {
+    -fx-background-color: #d0e4f7;
+}
+
+.table-column {
+    -fx-alignment: CENTER-LEFT;
+}
+
+/* Títulos de secciones */
+.label {
+    -fx-font-size: 12px; /* antes 18px */
     -fx-font-weight: bold;
-    -fx-font-size: 14px;
-    -fx-padding: 10px;
+    -fx-text-fill: #34495e;
+    -fx-padding: 8 0 8 0;
 }
 
-.table-row-cell:odd {
-    -fx-background-color: #f9f9f9;
-}
-
-.table-row-cell:selected {
-    -fx-background-color: #4a90e2;
-    -fx-text-fill: white;
+/* ScrollPane y VBox moderno */
+.scroll-pane, .v-box, .h-box {
+    -fx-background-color: transparent;
 }

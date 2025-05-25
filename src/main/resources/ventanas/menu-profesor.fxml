@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.bd_edu.controladores.MenuProfesorController" stylesheets="@../estilos.css">
+
+    <top>
+        <HBox spacing="10">
+            <padding>
+                <Insets top="15" right="15" bottom="15" left="15"/>
+            </padding>
+            <Label fx:id="labelBienvenida" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+        </HBox>
+    </top>
+
+    <center>
+        <TabPane fx:id="tabPanePrincipal">
+            <Tab fx:id="tabMaterias" text="Materias y Grupos">
+                <VBox spacing="10">
+                    <padding>
+                        <Insets top="10" right="10" bottom="10" left="10"/>
+                    </padding>
+                    <Label text="Materias y sus grupos asociados:" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+                    <TableView fx:id="tablaMateriasGrupos" prefHeight="300" styleClass="tabla-grande">
+                        <columns>
+                            <TableColumn fx:id="colMateria" text="Materia" prefWidth="250"/>
+                            <TableColumn fx:id="colGrupo" text="Grupo" prefWidth="250"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+            <Tab fx:id="tabTemas" text="Temas y Preguntas">
+                <SplitPane fx:id="splitPaneTemas" dividerPositions="0.5">
+                    <!-- Panel izquierdo - Preguntas -->
+                    <VBox>
+                        <padding>
+                            <Insets top="10" right="10" bottom="10" left="10"/>
+                        </padding>
+                        <Label text="Preguntas:" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+                        <TableView fx:id="tablaPreguntas" prefHeight="300" styleClass="tabla-grande">
+                            <columns>
+                                <TableColumn fx:id="colEnunciadoPregunta" text="Enunciado" prefWidth="300"/>
+                            </columns>
+                        </TableView>
+                    </VBox>
+
+                    <!-- Panel derecho - Temas y respuestas -->
+                    <VBox>
+                        <padding>
+                            <Insets top="10" right="10" bottom="10" left="10"/>
+                        </padding>
+
+                        <!-- Sección Temas -->
+                        <Label text="Temas:" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+                        <TableView fx:id="tablaTemas" prefHeight="150" styleClass="tabla-grande">
+                            <columns>
+                                <TableColumn fx:id="colNombreTema" text="Nombre del Tema" prefWidth="300"/>
+                            </columns>
+                        </TableView>
+
+                        <!-- Formulario para nueva pregunta -->
+                        <Label text="Nueva Pregunta:" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+                        <GridPane hgap="10" vgap="10">
+                            <columnConstraints>
+                                <ColumnConstraints halignment="RIGHT" minWidth="100"/>
+                                <ColumnConstraints minWidth="200"/>
+                            </columnConstraints>
+
+                            <Label text="Enunciado:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                            <TextField fx:id="txtNuevaPregunta" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                            <Label text="Tipo:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                            <ComboBox fx:id="cbTipoPregunta" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                            <Button fx:id="btnAgregarPregunta" text="Agregar Pregunta"
+                                    GridPane.rowIndex="2" GridPane.columnIndex="1"
+                                    style="-fx-font-size: 14px; -fx-padding: 5 10;"/>
+                        </GridPane>
+
+                        <!-- Panel de respuestas -->
+                        <Label text="Respuestas:" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+                        <VBox fx:id="panelRespuestas" spacing="5"
+                              style="-fx-border-color: #ccc; -fx-border-width: 1; -fx-padding: 5;"/>
+                    </VBox>
+                </SplitPane>
+            </Tab>
+
+            <Tab fx:id="tabEvaluaciones" text="Crear Evaluación">
+                <SplitPane dividerPositions="0.5">
+                    <!-- Panel izquierdo: Creación de evaluación -->
+                    <VBox spacing="10" style="-fx-padding: 10;">
+                        <Label text="Crear Nueva Evaluación" style="-fx-font-size: 16; -fx-font-weight: bold;"/>
+
+                        <GridPane hgap="10" vgap="10">
+                            <columnConstraints>
+                                <ColumnConstraints halignment="RIGHT" minWidth="150"/>
+                                <ColumnConstraints minWidth="200"/>
+                            </columnConstraints>
+
+                            <!-- Campos del formulario -->
+                            <Label text="Nombre:" GridPane.rowIndex="0"/>
+                            <TextField fx:id="txtNombreEvaluacion" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                            <Label text="Grupo:" GridPane.rowIndex="1"/>
+                            <ComboBox fx:id="cbGruposEvaluacion" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                            <Label text="Tema:" GridPane.rowIndex="2"/>
+                            <ComboBox fx:id="cbTemasEvaluacion" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                            <Label text="Número de preguntas:" GridPane.rowIndex="3"/>
+                            <TextField fx:id="txtCantidadPreguntas" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+                            <Label text="Porcentaje aprobación:" GridPane.rowIndex="4"/>
+                            <TextField fx:id="txtPorcentajeAprobacion" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+                            <Label text="Tiempo máximo (min):" GridPane.rowIndex="5"/>
+                            <TextField fx:id="txtTiempoMaximo" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+
+                            <!-- Fila 6: Fecha inicio -->
+                            <Label text="Fecha inicio:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+                            <DatePicker fx:id="dpFechaInicio" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+
+                            <!-- Fila 7: Fecha fin -->
+                            <Label text="Fecha fin:" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+                            <DatePicker fx:id="dpFechaFin" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+
+                            <Label text="Porcentaje del curso:" GridPane.rowIndex="8"/>
+                            <TextField fx:id="txtPorcentajeCurso" GridPane.rowIndex="8" GridPane.columnIndex="1"/>
+
+                            <Label text="N° Preguntas aleatorias:" GridPane.rowIndex="9"/>
+                            <TextField fx:id="txtCantidadPreguntasAletorias" GridPane.rowIndex="9" GridPane.columnIndex="1"/>
+                        </GridPane>
+
+                        <Button fx:id="btnCrearEvaluacion" text="Crear Evaluación"
+                                style="-fx-font-size: 14; -fx-padding: 5 15;"
+                                onAction="#crearEvaluacion"/>
+                    </VBox>
+
+                    <!-- Panel derecho: Asignación de preguntas -->
+                    <VBox fx:id="panelAsignacionPreguntas" spacing="10" style="-fx-padding: 10;" disable="true">
+                        <Label text="Asignar Preguntas" style="-fx-font-size: 16; -fx-font-weight: bold;"/>
+
+                        <!-- Lista de preguntas disponibles -->
+                        <Label text="Preguntas disponibles:"/>
+                        <TableView fx:id="tablaPreguntasEvaluacion" prefHeight="200" styleClass="tabla-grande">
+                            <columns>
+                                <TableColumn fx:id="colEnunciadoPreguntaEval" text="Enunciado" prefWidth="300"/>
+                            </columns>
+                        </TableView>
+
+                        <!-- Asignación manual -->
+                        <Label text="Asignar pregunta manualmente:" style="-fx-font-weight: bold;"/>
+                        <GridPane hgap="10" vgap="10">
+                            <columnConstraints>
+                                <ColumnConstraints halignment="RIGHT" minWidth="150"/>
+                                <ColumnConstraints minWidth="200"/>
+                            </columnConstraints>
+
+                            <Label text="Porcentaje (opcional):" GridPane.rowIndex="0"/>
+                            <TextField fx:id="txtPorcentajePregunta" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                            <Label text="Tiempo máximo (opcional):" GridPane.rowIndex="1"/>
+                            <HBox spacing="10" GridPane.rowIndex="1" GridPane.columnIndex="1">
+                                <CheckBox fx:id="chkTieneTiempoMaximo" text="Habilitar"/>
+                            </HBox>
+
+                            <Button fx:id="btnAsignarPregunta" text="Asignar Pregunta"
+                                    GridPane.rowIndex="2" GridPane.columnIndex="1"
+                                    style="-fx-font-size: 14; -fx-padding: 5 10;"
+                                    onAction="#asignarPreguntaManual"/>
+                        </GridPane>
+
+                        <!-- Asignación aleatoria -->
+                        <!-- Asignación aleatoria -->
+                        <Label text="Asignar preguntas aleatorias:" style="-fx-font-weight: bold;"/>
+                        <Button fx:id="btnAsignarAleatorias" text="Asignar Aleatoriamente"
+                                style="-fx-font-size: 14; -fx-padding: 5 10;"
+                                onAction="#asignarPreguntasAleatorias"/>
+                    </VBox>
+                </SplitPane>
+            </Tab>
+        </TabPane>
+    </center>
+</BorderPane>
