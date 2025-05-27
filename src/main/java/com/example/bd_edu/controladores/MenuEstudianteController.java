@@ -305,16 +305,20 @@ public class MenuEstudianteController {
                 throw new Exception("Datos incompletos para registrar respuesta");
             }
 
+            System.out.println("Intentando registrar respuesta - Pregunta: " + idPregunta +
+                    ", Opción: " + idOpcion);
+
             ResponderPregunta datos = new ResponderPregunta(
                     idPresentacionActual,
                     idPregunta,
                     idOpcion
             );
 
-            System.out.println("Registrando respuesta - Presentación: " + idPresentacionActual +
-                    ", Pregunta: " + idPregunta + ", Opción: " + idOpcion);
+            Map<String, Object> resultado = servicioEstudiante.responderPregunta(datos);
 
-            servicioEstudiante.responderPregunta(datos);
+            // Añadir log del resultado
+            System.out.println("Resultado del registro de respuesta: " + resultado);
+
         } catch (Exception e) {
             System.err.println("Error al registrar respuesta: " + e.getMessage());
             mostrarAlerta("Error al registrar respuesta", e.getMessage());

@@ -108,13 +108,14 @@ public class ServicioEstudiante {
         }
     }
 
-    public void responderPregunta(ResponderPregunta datos) throws Exception {
+    public Map<String, Object> responderPregunta(ResponderPregunta datos) throws Exception {
         try {
             Map<String, Object> resultado = repositorioEstudiante.responderPregunta(datos);
             procesarResultadoGenerico(resultado, "registrar la respuesta del estudiante");
         } catch (SQLException e) {
             throw new Exception("Error al registrar la respuesta del estudiante: " + e.getMessage(), e);
         }
+        return null;
     }
 
     public Map<String, Object> finalizarEvaluacion(Long idPresentacion) throws Exception {
@@ -191,10 +192,11 @@ public class ServicioEstudiante {
         Float calificacion = resultado.get("p_calificacion_out") != null ?
                 ((Number) resultado.get("p_calificacion_out")).floatValue() : null;
 
-        System.out.println("Resultado de finalización:");
+        System.out.println("Resultado detallado de finalización:");
         System.out.println("Estado: " + estado);
         System.out.println("Mensaje: " + mensaje);
         System.out.println("Calificación: " + calificacion);
+        System.out.println("Todos los datos recibidos: " + resultado);
 
         if (!"EXITO".equalsIgnoreCase(estado)) {
             throw new Exception("No se pudo finalizar la presentación: " +

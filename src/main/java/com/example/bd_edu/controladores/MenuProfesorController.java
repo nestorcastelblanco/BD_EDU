@@ -60,7 +60,7 @@ public class MenuProfesorController {
     @FXML private TableView<Map<String, Object>> tablaPreguntasEvaluacion;
     @FXML private TableColumn<Map<String, Object>, String> colEnunciadoPreguntaEval;
     @FXML private CheckBox chkTieneTiempoMaximo;
-    @FXML private TextField txtTiempoPorPregunta;
+    // Eliminado: @FXML private TextField txtTiempoPorPregunta;
     @FXML private TextField txtPorcentajePregunta;
     @FXML private VBox panelAsignacionPreguntas;
 
@@ -102,11 +102,11 @@ public class MenuProfesorController {
         cbTipoPregunta.getItems().addAll("Selección única", "Selección múltiple", "Verdadero/Falso", "Ordenamiento");
         cbTipoPregunta.getSelectionModel().selectFirst();
 
-        // Configuración de controles dependientes
-        chkTieneTiempoMaximo.selectedProperty().addListener((obs, oldVal, newVal) -> {
-            txtTiempoPorPregunta.setDisable(!newVal);
-            if (!newVal) txtTiempoPorPregunta.clear();
-        });
+        // Eliminada la configuración del listener para txtTiempoPorPregunta
+        // chkTieneTiempoMaximo.selectedProperty().addListener((obs, oldVal, newVal) -> {
+        //     txtTiempoPorPregunta.setDisable(!newVal);
+        //     if (!newVal) txtTiempoPorPregunta.clear();
+        // });
     }
 
     private void configurarEventListeners() {
@@ -360,13 +360,15 @@ public class MenuProfesorController {
         try {
             CrearEvaluacion datos = construirDatosEvaluacion();
 
-            // Modificación importante: Usar el campo correcto para el total de preguntas
-            datos.setCantidadPreguntas(Integer.parseInt(txtCantidadPreguntas.getText()));
-
-            // Las preguntas aleatorias son un subconjunto del total
+            // Validar que preguntas aleatorias no superen el total
+            int totalPreguntas = Integer.parseInt(txtCantidadPreguntas.getText());
             if (!txtCantidadPreguntasAletorias.getText().trim().isEmpty()) {
                 int preguntasAleatorias = Integer.parseInt(txtCantidadPreguntasAletorias.getText());
-                datos.setPreguntasAleatorias(preguntasAleatorias > 0 ? 1 : 0);
+                if (preguntasAleatorias > totalPreguntas) {
+                    mostrarAlerta("Error", "Las preguntas aleatorias no pueden ser más que el total de preguntas");
+                    return;
+                }
+                datos.setPreguntasAleatorias(preguntasAleatorias);
             } else {
                 datos.setPreguntasAleatorias(0);
             }
@@ -395,7 +397,8 @@ public class MenuProfesorController {
                 txtTiempoMaximo.getText().trim().isEmpty() ||
                 txtPorcentajeCurso.getText().trim().isEmpty() ||
                 dpFechaInicio.getValue() == null ||
-                dpFechaFin.getValue() == null) {
+                dpFechaFin.getValue() == null ||
+                txtCantidadPreguntas.getText().trim().isEmpty()) {
             mostrarAlerta("Error", "Complete todos los campos obligatorios");
             return false;
         }
@@ -411,10 +414,12 @@ public class MenuProfesorController {
             int porcentajeAprobacion = Integer.parseInt(txtPorcentajeAprobacion.getText());
             int tiempoMaximo = Integer.parseInt(txtTiempoMaximo.getText());
             int porcentajeCurso = Integer.parseInt(txtPorcentajeCurso.getText());
+            int totalPreguntas = Integer.parseInt(txtCantidadPreguntas.getText());
 
             if (porcentajeAprobacion < 0 || porcentajeAprobacion > 100 ||
                     tiempoMaximo <= 0 ||
-                    porcentajeCurso < 0 || porcentajeCurso > 100) {
+                    porcentajeCurso < 0 || porcentajeCurso > 100 ||
+                    totalPreguntas <= 0) {
                 mostrarAlerta("Error", "Valores numéricos inválidos");
                 return false;
             }
@@ -422,8 +427,8 @@ public class MenuProfesorController {
             // Validar preguntas aleatorias (opcional)
             if (!txtCantidadPreguntasAletorias.getText().trim().isEmpty()) {
                 int cantidad = Integer.parseInt(txtCantidadPreguntasAletorias.getText());
-                if (cantidad < 0) {
-                    mostrarAlerta("Error", "Número de preguntas no puede ser negativo");
+                if (cantidad < 0 || cantidad > totalPreguntas) {
+                    mostrarAlerta("Error", "Número de preguntas aleatorias inválido");
                     return false;
                 }
             }
@@ -451,7 +456,7 @@ public class MenuProfesorController {
         // Manejar preguntas aleatorias (opcional)
         if (!txtCantidadPreguntasAletorias.getText().trim().isEmpty()) {
             int preguntasAleatorias = Integer.parseInt(txtCantidadPreguntasAletorias.getText());
-            datos.setPreguntasAleatorias(preguntasAleatorias > 0 ? 1 : 0);
+            datos.setPreguntasAleatorias(preguntasAleatorias);
         } else {
             datos.setPreguntasAleatorias(0);
         }
@@ -528,28 +533,44 @@ public class MenuProfesorController {
 
             // Manejo del porcentaje (opcional)
             if (!txtPorcentajePregunta.getText().trim().isEmpty()) {
-                datos.setPorcentaje(Integer.parseInt(txtPorcentajePregunta.getText()));
-            } else {
-                datos.setPorcentaje(0); // Enviar 0 en lugar de null
-            }
-
-            // Manejo del tiempo
-            datos.setTieneTiempoMaximo(chkTieneTiempoMaximo.isSelected() ? "S" : "N");
-            if (chkTieneTiempoMaximo.isSelected()) {
-                if (!txtTiempoPorPregunta.getText().trim().isEmpty()) {
-                    datos.setTiempoPorPregunta(Integer.parseInt(txtTiempoPorPregunta.getText()));
-                } else {
-                    mostrarAlerta("Error", "Debe especificar el tiempo cuando habilita esta opción");
+                // Validar que el porcentaje sea numérico y esté en rango válido
+                int porcentaje = Integer.parseInt(txtPorcentajePregunta.getText());
+                if (porcentaje < 0 || porcentaje > 100) {
+                    mostrarAlerta("Error", "El porcentaje debe estar entre 0 y 100");
                     return;
                 }
+                datos.setPorcentaje(porcentaje);
             } else {
-                datos.setTiempoPorPregunta(0); // Enviar 0 cuando no hay tiempo
+                // Si no se especifica porcentaje, calcularlo automáticamente
+                Map<String, Object> infoEvaluacion = servicioProfesor.obtenerInfoEvaluacion(idEvaluacionActual);
+                if ("EXITO".equals(infoEvaluacion.get("estado"))) {
+                    int totalPreguntas = (int) infoEvaluacion.get("cantidad_preguntas");
+                    if (totalPreguntas > 0) {
+                        datos.setPorcentaje(100 / totalPreguntas); // Distribución equitativa
+                    } else {
+                        datos.setPorcentaje(0);
+                    }
+                } else {
+                    datos.setPorcentaje(0);
+                }
             }
+
+            // Manejo del tiempo - solo basado en el CheckBox, el tiempo se asume en PL/SQL
+            datos.setTieneTiempoMaximo(chkTieneTiempoMaximo.isSelected() ? "S" : "N");
+            // Aquí, si chkTieneTiempoMaximo está seleccionado, el valor de tiempo por pregunta
+            // se asume que se manejará en el PL/SQL o que no requiere un valor específico desde la UI.
+            // Si necesitas enviar un valor por defecto o un placeholder, podrías hacerlo.
+            // Por ahora, si no hay un TextField, enviamos 0 o un valor por defecto que tu PL/SQL entienda.
+            datos.setTiempoPorPregunta(0); // O el valor que tu PL/SQL espera por defecto cuando hay tiempo máximo
 
             Map<String, Object> resultado = servicioProfesor.asignarPreguntaAEvaluacion(datos);
 
             if ("EXITO".equals(resultado.get("estado"))) {
                 mostrarAlerta("Éxito", "Pregunta asignada correctamente");
+                // Limpiar campos después de asignar
+                txtPorcentajePregunta.clear();
+                chkTieneTiempoMaximo.setSelected(false);
+                // Eliminado: txtTiempoPorPregunta.clear();
                 cargarPreguntasAsignadasAEvaluacion();
             } else {
                 mostrarAlerta("Error", (String) resultado.get("mensaje"));
@@ -561,16 +582,17 @@ public class MenuProfesorController {
         }
     }
 
-    private AsignarPreguntaAEvaluacion construirDatosAsignacionPregunta(Map<String, Object> pregunta) {
-        AsignarPreguntaAEvaluacion datos = new AsignarPreguntaAEvaluacion();
-        datos.setIdPregunta((Long) pregunta.get("id_pregunta"));
-        datos.setIdEvaluacion(idEvaluacionActual);
-        datos.setPorcentaje(Integer.parseInt(txtPorcentajePregunta.getText()));
-        datos.setTieneTiempoMaximo(chkTieneTiempoMaximo.isSelected() ? "S" : "N");
-        datos.setTiempoPorPregunta(chkTieneTiempoMaximo.isSelected() ?
-                Integer.parseInt(txtTiempoPorPregunta.getText()) : 0);
-        return datos;
-    }
+    // Eliminado: Este método ya no es necesario tal cual, ya que la lógica está en asignarPreguntaManual()
+    // private AsignarPreguntaAEvaluacion construirDatosAsignacionPregunta(Map<String, Object> pregunta) {
+    //     AsignarPreguntaAEvaluacion datos = new AsignarPreguntaAEvaluacion();
+    //     datos.setIdPregunta((Long) pregunta.get("id_pregunta"));
+    //     datos.setIdEvaluacion(idEvaluacionActual);
+    //     datos.setPorcentaje(Integer.parseInt(txtPorcentajePregunta.getText()));
+    //     datos.setTieneTiempoMaximo(chkTieneTiempoMaximo.isSelected() ? "S" : "N");
+    //     datos.setTiempoPorPregunta(chkTieneTiempoMaximo.isSelected() ?
+    //             Integer.parseInt(txtTiempoPorPregunta.getText()) : 0);
+    //     return datos;
+    // }
 
     private void cargarPreguntasAsignadasAEvaluacion() {
         if (idEvaluacionActual == null) return;
